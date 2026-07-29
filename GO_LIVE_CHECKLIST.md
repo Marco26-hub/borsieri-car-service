@@ -11,21 +11,20 @@
 - Endpoint `/api/appointments` pronto per salvare richieste in Supabase.
 - Schema Supabase in `supabase/001_appointments.sql`.
 - Metadata SEO, canonical, Open Graph, sitemap e robots pronti per `borsiericarservice.it`.
+- Repository GitHub creato e pushato: `https://github.com/Marco26-hub/borsieri-car-service.git`.
 
 ## Da fare prima del dominio ufficiale
 
-1. Creare o ricevere accesso al progetto GitHub ufficiale.
-2. Pushare la cartella `site/` nel repository GitHub.
-3. Creare progetto Vercel collegato al repository.
-4. Impostare su Vercel le variabili:
+1. Creare progetto Vercel collegato al repository GitHub.
+2. Impostare su Vercel le variabili:
    - `SUPABASE_URL`
    - `SUPABASE_SERVICE_ROLE_KEY`
-5. Eseguire lo script SQL `supabase/001_appointments.sql` in Supabase.
-6. Verificare che il form prenotazione salvi una riga nella tabella `appointments`.
-7. Collegare il dominio `borsiericarservice.it` e `www.borsiericarservice.it` su Vercel.
-8. Aggiornare DNS del dominio come indicato da Vercel.
-9. Verificare redirect canonico verso `https://www.borsiericarservice.it`.
-10. Fare test finale da mobile:
+3. Eseguire lo script SQL `supabase/001_appointments.sql` in Supabase.
+4. Verificare che il form prenotazione salvi una riga nella tabella `appointments`.
+5. Collegare il dominio `borsiericarservice.it` e `www.borsiericarservice.it` su Vercel.
+6. Aggiornare DNS del dominio come indicato da Vercel.
+7. Verificare redirect canonico verso `https://www.borsiericarservice.it`.
+8. Fare test finale da mobile:
     - navigazione;
     - chiamata telefonica;
     - email;
