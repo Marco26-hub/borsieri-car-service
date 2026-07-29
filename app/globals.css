@@ -411,6 +411,15 @@ section {
   overflow: hidden;
 }
 
+.service.primary-service {
+  border-color: rgba(255, 153, 0, 0.5);
+  box-shadow: 0 24px 70px rgba(255, 153, 0, 0.12);
+}
+
+.service.primary-service h3 {
+  color: var(--orange);
+}
+
 .service img {
   aspect-ratio: 16 / 11;
   object-fit: cover;

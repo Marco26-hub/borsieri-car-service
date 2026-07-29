@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Borsieri Car Service | Carrozzeria, meccanica e cambio gomme",
+  title: "Carrozzeria Borsieri Car Service | San Fermo della Battaglia, Como",
   description:
-    "Carrozzeria, meccanica e cambio gomme a San Fermo della Battaglia. Prenota uno slot direttamente dal sito.",
+    "Carrozzeria specializzata a San Fermo della Battaglia, vicino a Como. Riparazioni auto, verniciatura, grandine, cristalli, officina meccanica e cambio gomme.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
