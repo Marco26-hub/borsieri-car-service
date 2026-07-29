@@ -160,12 +160,13 @@ export default function Home() {
   const [selectedDate, setSelectedDate] = useState(() => toDateKey(days[0]));
   const [selectedTime, setSelectedTime] = useState("");
   const [confirmation, setConfirmation] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const selectedDay = days.find((day) => toDateKey(day) === selectedDate) ?? days[0];
   const slots = buildSlotsForDate(selectedDay);
   const readableDate = longDateFormatter.format(selectedDay);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!selectedTime) {
@@ -176,10 +177,39 @@ export default function Home() {
     const formData = new FormData(event.currentTarget);
     const name = String(formData.get("name") ?? "").trim();
     const service = String(formData.get("service") ?? "");
-    setConfirmation(
-      `${name}, richiesta ricevuta per ${service}: ${readableDate} alle ${selectedTime}. L'officina confermera disponibilita e dettagli dell'appuntamento.`,
-    );
-    event.currentTarget.reset();
+    const form = event.currentTarget;
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/appointments", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service,
+          date: selectedDate,
+          time: selectedTime,
+          name,
+          phone: formData.get("phone"),
+          car: formData.get("car"),
+          notes: formData.get("notes"),
+        }),
+      });
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        setConfirmation(result.error ?? "Richiesta non inviata. Contatta l'officina telefonicamente.");
+        return;
+      }
+
+      setConfirmation(
+        `${name}, richiesta ricevuta per ${service}: ${readableDate} alle ${selectedTime}. L'officina confermera disponibilita e dettagli dell'appuntamento.`,
+      );
+      form.reset();
+    } catch {
+      setConfirmation("Connessione non disponibile. Contatta Borsieri Car Service telefonicamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -322,8 +352,8 @@ export default function Home() {
                     Note
                     <textarea name="notes" placeholder="Misura gomme, deposito, urgenze" />
                   </label>
-                  <button className="button primary" type="submit">
-                    Invia richiesta
+                  <button className="button primary" disabled={isSubmitting} type="submit">
+                    {isSubmitting ? "Invio in corso" : "Invia richiesta"}
                   </button>
                 </form>
                 {confirmation ? (
