@@ -8,8 +8,8 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=86",
     description:
-      "Il know-how principale di Borsieri: riparazioni di carrozzeria, ripristino danni, verniciatura e finiture professionali.",
-    items: ["Riparazione urti e graffi", "Grandine, cristalli e verniciatura", "Gestione sinistri e auto sostitutiva"],
+      "Riparazioni di carrozzeria eseguite con metodo: valutazione del danno, ripristino dei lamierati, verniciatura e controllo della finitura.",
+    items: ["Ripristino urti, graffi e ammaccature", "Verniciatura e finitura colore", "Grandine, cristalli e pratiche sinistri"],
     primary: true,
   },
   {
@@ -17,37 +17,37 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=1200&q=86",
     description:
-      "Manutenzione auto, diagnosi elettronica e controlli meccanici a supporto di un servizio auto completo.",
-    items: ["Tagliandi e manutenzione", "Diagnosi elettronica", "Freni, sospensioni e climatizzazione"],
+      "Controlli meccanici, diagnosi e manutenzione per completare l'intervento sull'auto con un unico referente.",
+    items: ["Tagliandi e manutenzione programmata", "Diagnosi elettronica e controlli", "Freni, sospensioni e climatizzazione"],
   },
   {
     title: "Gommista e pneumatici",
     image:
       "https://images.unsplash.com/photo-1606577924006-27d39b132ae2?auto=format&fit=crop&w=1200&q=86",
     description:
-      "Cambio gomme estive e invernali, montaggio pneumatici, equilibratura, convergenza e deposito gomme vicino a Como.",
-    items: ["Cambio gomme stagionale", "Equilibratura e convergenza", "Riparazione e deposito pneumatici"],
+      "Servizio pneumatici per cambio stagione, sicurezza su strada e corretta usura delle gomme.",
+    items: ["Cambio gomme estive e invernali", "Equilibratura, convergenza e assetto", "Riparazione e deposito pneumatici"],
   },
 ];
 
 const workCards = [
   {
-    label: "Know-how principale",
-    title: "Carrozzeria a San Fermo della Battaglia",
+    label: "Specializzazione storica",
+    title: "Riparazioni di carrozzeria con finitura professionale",
     text:
-      "Riparazione di danni da urto, graffi, ammaccature, grandine e cristalli con lavorazioni curate, verniciatura professionale e attenzione alla finitura finale.",
+      "Ogni danno viene valutato con attenzione prima dell'intervento: ripristino, verniciatura e finitura sono gestiti con cura per restituire un'auto ordinata, sicura e coerente nel colore.",
   },
   {
     label: "Meccanica",
-    title: "Officina meccanica per manutenzione e diagnosi",
+    title: "Manutenzione e diagnosi con un unico referente",
     text:
-      "Tagliandi, controlli meccanici, impianto frenante, sospensioni, elettronica, ricarica clima e verifiche utili prima della revisione.",
+      "Tagliandi, controlli meccanici, impianto frenante, sospensioni, elettronica e ricarica clima completano il servizio quando l'auto richiede piu di una riparazione estetica.",
   },
   {
     label: "Cambio gomme",
-    title: "Cambio gomme e pneumatici vicino a Como",
+    title: "Pneumatici e cambio gomme con prenotazione online",
     text:
-      "Sostituzione gomme estive e invernali, montaggio pneumatici nuovi, equilibratura, convergenza, riparazione forature e deposito stagionale.",
+      "Il calendario integrato consente di richiedere uno slot per sostituzione stagionale, montaggio pneumatici nuovi, equilibratura, convergenza e deposito gomme.",
   },
 ];
 
@@ -199,32 +199,29 @@ export default function Home() {
           <a href="#contatti">Contatti</a>
         </nav>
         <a className="button primary" href="#prenota">
-          Prenota
+          Prenota online
         </a>
       </header>
 
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-copy">
-            <div className="eyebrow">Carrozzeria specializzata dal 1975</div>
-            <h1>Carrozzeria Borsieri a San Fermo della Battaglia</h1>
+            <div className="eyebrow">Carrozzeria storica vicino a Como</div>
+            <h1>Carrozzeria Borsieri Car Service</h1>
             <p className="lead">
-              Borsieri Car Service nasce dalla carrozzeria e mantiene nella riparazione auto
-              il suo know-how principale. A San Fermo della Battaglia, vicino a Como, affianca
-              alle lavorazioni di carrozzeria anche officina meccanica, pneumatici e cambio gomme.
+              Dal 1975, Borsieri mette al centro la riparazione di carrozzeria: danni da urto,
+              graffi, grandine, cristalli e verniciatura. A San Fermo della Battaglia, vicino
+              a Como, completa il servizio con officina meccanica e pneumatici.
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#servizi">
-                Scopri la carrozzeria
+                Valuta un intervento
               </a>
-              <a className="button primary" href="#prenota">
-                Prenota cambio gomme
+              <a className="button secondary" href="#prenota">
+                Prenota pneumatici
               </a>
               <a className="button secondary" href="#lavorazioni">
-                Scopri lavorazioni
-              </a>
-              <a className="button secondary" href="tel:+39031210622">
-                Chiama l'officina
+                Vedi lavorazioni
               </a>
             </div>
             <div className="metrics" aria-label="Punti di forza">
@@ -249,10 +246,10 @@ export default function Home() {
               alt="Tecnico in officina durante un controllo gomme"
             />
             <div className="booking-body">
-              <h2>Prenota il cambio gomme a San Fermo</h2>
+              <h2>Prenota pneumatici e cambio gomme</h2>
               <p>
-                Scegli uno slot negli orari di apertura dell'officina e invia la richiesta
-                per cambio gomme stagionale, equilibratura, convergenza o deposito pneumatici.
+                Seleziona una fascia disponibile e invia la richiesta. L'officina confermera
+                l'appuntamento in base al tipo di lavorazione e alle note sul veicolo.
               </p>
               <div className="booking-calendar">
                 <div className="booking-days" aria-label="Giorni disponibili">
@@ -325,7 +322,7 @@ export default function Home() {
                     <textarea name="notes" placeholder="Misura gomme, deposito, urgenze" />
                   </label>
                   <button className="button primary" type="submit">
-                    Conferma richiesta
+                    Invia richiesta
                   </button>
                 </form>
                 {confirmation ? (
@@ -342,11 +339,11 @@ export default function Home() {
       <section id="servizi">
         <div className="section-inner">
           <div className="section-head">
-            <h2>Carrozzeria prima di tutto, servizi auto completi</h2>
+            <h2>Carrozzeria come competenza principale</h2>
             <p>
-              Il cuore dell'attivita e la carrozzeria: riparazioni, verniciatura e ripristino
-              danni. Meccanica e pneumatici completano il servizio per seguire l'auto in modo
-              pratico e coordinato.
+              La carrozzeria e il centro dell'esperienza Borsieri. Meccanica e pneumatici
+              completano il percorso per offrire al cliente un servizio ordinato, coordinato
+              e seguito da un unico referente.
             </p>
           </div>
           <div className="services">
@@ -371,11 +368,11 @@ export default function Home() {
       <section className="workshop" id="lavorazioni">
         <div className="section-inner">
           <div className="section-head">
-            <h2>Lavorazioni di carrozzeria e assistenza auto</h2>
+            <h2>Lavorazioni curate, dalla diagnosi alla consegna</h2>
             <p>
-              Dalla riparazione dei danni alla verniciatura, fino a meccanica e pneumatici:
-              Borsieri Car Service valorizza la competenza di carrozzeria con un'assistenza
-              auto completa e professionale.
+              Il lavoro viene presentato con chiarezza, eseguito con attenzione tecnica e
+              controllato nei dettagli finali: un approccio pensato per chi cerca una
+              carrozzeria affidabile nell'area di Como.
             </p>
           </div>
           <div className="work-grid">
@@ -393,29 +390,29 @@ export default function Home() {
       <section className="process">
         <div className="section-inner">
           <div className="section-head">
-            <h2>Prenotazione online semplice e professionale</h2>
-            <p>Il cliente sceglie lo slot dal sito e l'officina gestisce la richiesta con conferma dedicata.</p>
+            <h2>Prenotazione online, conferma dall'officina</h2>
+            <p>Il cliente sceglie lo slot dal sito; Borsieri verifica la richiesta e conferma l'appuntamento.</p>
           </div>
           <div className="steps">
             <div className="step">
               <span>01</span>
               <h3>Scegli la lavorazione</h3>
-              <p>Cambio stagionale, montaggio, equilibratura, convergenza o deposito gomme.</p>
+              <p>Seleziona cambio stagionale, montaggio, equilibratura, convergenza o deposito gomme.</p>
             </div>
             <div className="step">
               <span>02</span>
               <h3>Indica i dati auto</h3>
-              <p>Modello, misura pneumatici e note aiutano a preparare l'intervento.</p>
+              <p>Marca, modello, misura pneumatici e note aiutano a preparare correttamente il lavoro.</p>
             </div>
             <div className="step">
               <span>03</span>
               <h3>Seleziona lo slot</h3>
-              <p>Il calendario mostra solo finestre coerenti con gli orari dell'officina.</p>
+              <p>Il calendario propone fasce coerenti con gli orari di apertura dell'officina.</p>
             </div>
             <div className="step">
               <span>04</span>
               <h3>Attendi conferma</h3>
-              <p>La richiesta entra in dashboard e puo essere confermata o riprogrammata.</p>
+              <p>La richiesta viene presa in carico e puo essere confermata o riprogrammata.</p>
             </div>
           </div>
         </div>
@@ -425,7 +422,7 @@ export default function Home() {
         <div className="section-inner contact-grid">
           <div>
             <div className="eyebrow">Via San Fermo 64 · San Fermo della Battaglia</div>
-            <h2>Assistenza auto vicino a Como, comoda da raggiungere</h2>
+            <h2>Carrozzeria e assistenza auto vicino a Como</h2>
           </div>
           <div className="contact-list">
             <div className="contact-item">
@@ -451,10 +448,10 @@ export default function Home() {
                 rel="noreferrer"
                 target="_blank"
               >
-                Apri indicazioni
+                Apri le indicazioni
               </a>
               <a className="button secondary" href="mailto:info@borsiericarservice.it">
-                Scrivi una email
+                Richiedi informazioni
               </a>
             </div>
           </div>
