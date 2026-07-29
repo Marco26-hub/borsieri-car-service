@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Carrozzeria Borsieri Car Service | San Fermo della Battaglia, Como",
   description:
-    "Carrozzeria specializzata a San Fermo della Battaglia, vicino a Como. Riparazioni auto, verniciatura, grandine, cristalli, officina meccanica e cambio gomme.",
+    "Carrozzeria specializzata a San Fermo della Battaglia, vicino a Como. Riparazioni auto, verniciatura, grandine, cristalli, officina meccanica e nuovo servizio di prenotazione cambio gomme online.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

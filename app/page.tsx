@@ -199,7 +199,7 @@ export default function Home() {
           <a href="#contatti">Contatti</a>
         </nav>
         <a className="button primary" href="#prenota">
-          Prenota online
+          Nuovo: prenota gomme
         </a>
       </header>
 
@@ -218,7 +218,7 @@ export default function Home() {
                 Valuta un intervento
               </a>
               <a className="button secondary" href="#prenota">
-                Prenota pneumatici
+                Nuovo: prenota cambio gomme
               </a>
               <a className="button secondary" href="#lavorazioni">
                 Vedi lavorazioni
@@ -246,6 +246,7 @@ export default function Home() {
               alt="Tecnico in officina durante un controllo gomme"
             />
             <div className="booking-body">
+              <div className="booking-kicker">Nuovo servizio online</div>
               <h2>Prenota pneumatici e cambio gomme</h2>
               <p>
                 Seleziona una fascia disponibile e invia la richiesta. L'officina confermera
@@ -361,6 +362,42 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="new-service" aria-label="Nuovo servizio di prenotazione cambio gomme">
+        <div className="section-inner new-service-grid">
+          <div className="new-service-copy">
+            <div className="new-service-label">Nuovo servizio</div>
+            <h2>Prenotazione cambio gomme direttamente dal sito</h2>
+            <p>
+              Borsieri Car Service affianca alla propria competenza di carrozzeria un nuovo
+              servizio digitale per pneumatici e cambio gomme. Il cliente sceglie una fascia
+              disponibile online, indica i dati dell'auto e riceve conferma dall'officina.
+            </p>
+            <div className="hero-actions">
+              <a className="button primary" href="#prenota">
+                Prenota uno slot
+              </a>
+              <a className="button secondary" href="tel:+39031210622">
+                Parla con l'officina
+              </a>
+            </div>
+          </div>
+          <div className="new-service-points">
+            <div className="new-service-point">
+              <strong>Slot negli orari di apertura</strong>
+              <span>Fasce disponibili dal lunedi al venerdi, mattina e pomeriggio.</span>
+            </div>
+            <div className="new-service-point">
+              <strong>Richiesta completa</strong>
+              <span>Servizio, telefono, veicolo e note arrivano gia ordinati all'officina.</span>
+            </div>
+            <div className="new-service-point">
+              <strong>Conferma professionale</strong>
+              <span>Borsieri verifica la richiesta e conferma appuntamento e dettagli.</span>
+            </div>
           </div>
         </div>
       </section>

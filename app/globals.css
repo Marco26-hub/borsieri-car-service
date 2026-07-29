@@ -229,9 +229,9 @@ h1 {
 .booking-panel {
   align-self: start;
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 153, 0, 0.42);
   border-radius: 8px;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+  box-shadow: 0 28px 90px rgba(255, 153, 0, 0.12), 0 28px 80px rgba(0, 0, 0, 0.36);
   overflow: hidden;
 }
 
@@ -248,6 +248,26 @@ h1 {
 .booking-body h2 {
   font-size: 1.32rem;
   margin: 0 0 10px;
+}
+
+.booking-kicker,
+.new-service-label {
+  align-items: center;
+  color: var(--orange);
+  display: inline-flex;
+  font-size: 0.76rem;
+  font-weight: 900;
+  gap: 8px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.booking-kicker::before,
+.new-service-label::before {
+  background: var(--orange);
+  content: "";
+  height: 8px;
+  width: 8px;
 }
 
 .booking-body p {
@@ -486,6 +506,58 @@ section {
   background: #0b0b0b;
 }
 
+.new-service {
+  background: #151515;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.new-service-grid {
+  align-items: center;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+
+.new-service-copy h2 {
+  font-size: clamp(2rem, 10vw, 3rem);
+  line-height: 1;
+  margin: 0;
+  max-width: 760px;
+  text-transform: uppercase;
+}
+
+.new-service-copy p {
+  color: var(--muted);
+  line-height: 1.58;
+  margin: 18px 0 0;
+  max-width: 680px;
+}
+
+.new-service-points {
+  display: grid;
+  gap: 10px;
+}
+
+.new-service-point {
+  background: rgba(255, 153, 0, 0.08);
+  border: 1px solid rgba(255, 153, 0, 0.22);
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.new-service-point strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.new-service-point span {
+  color: var(--muted);
+  display: block;
+  line-height: 1.45;
+}
+
 .work-card {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.11);
@@ -607,6 +679,7 @@ footer {
   .booking-days,
   .booking-slots,
   .services,
+  .new-service-points,
   .work-grid,
   .steps {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -681,6 +754,10 @@ footer {
 
   .steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .new-service-grid {
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
   }
 
   .contact-grid {
