@@ -61,14 +61,14 @@ appointments
 
 ## Cosa resta da fare quando arrivano le credenziali
 
-1. Collegare il repository GitHub a Vercel.
+1. Collegare il repository GitHub a Netlify.
 2. Creare o selezionare il progetto Supabase.
 3. Eseguire in Supabase lo script `supabase/001_appointments.sql`.
-4. Inserire in Vercel `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`.
-5. Fare deploy Vercel.
+4. Inserire in Netlify `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`.
+5. Fare deploy Netlify.
 6. Testare una richiesta prenotazione e verificare che compaia in Supabase.
 7. Collegare `borsiericarservice.it` e `www.borsiericarservice.it`.
-8. Aggiornare DNS secondo le istruzioni Vercel.
+8. Aggiornare DNS secondo le istruzioni Netlify.
 9. Verificare redirect e canonical su `https://www.borsiericarservice.it`.
 10. Fare test finale da mobile e desktop.
 
@@ -102,6 +102,12 @@ Build:
 npm run build
 ```
 
+Build preview Sites:
+
+```bash
+npm run build:sites
+```
+
 Stato Git:
 
 ```bash
@@ -113,4 +119,3 @@ Push GitHub:
 ```bash
 git push origin main
 ```
-

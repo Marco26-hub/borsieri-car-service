@@ -279,8 +279,8 @@ export default function Home() {
               <div className="booking-kicker">Nuovo servizio online</div>
               <h2>Prenota pneumatici e cambio gomme</h2>
               <p>
-                Seleziona una fascia disponibile e invia la richiesta. L'officina confermera
-                l'appuntamento in base al tipo di lavorazione e alle note sul veicolo.
+                Seleziona una fascia disponibile e invia la richiesta. L&apos;officina confermera
+                l&apos;appuntamento in base al tipo di lavorazione e alle note sul veicolo.
               </p>
               <div className="booking-calendar">
                 <div className="booking-days" aria-label="Giorni disponibili">
@@ -374,7 +374,7 @@ export default function Home() {
             <p>
               La carrozzeria e la specializzazione storica di Borsieri Car Service: analisi
               del danno, riparazione, verniciatura e controllo finale. Meccanica e pneumatici
-              completano l'assistenza con un unico referente.
+              completano l&apos;assistenza con un unico referente.
             </p>
           </div>
           <div className="services">
@@ -404,14 +404,14 @@ export default function Home() {
             <p>
               Borsieri Car Service affianca alla propria competenza di carrozzeria un nuovo
               servizio digitale per pneumatici e cambio gomme. Il cliente sceglie una fascia
-              disponibile online, indica i dati dell'auto e riceve conferma dall'officina.
+              disponibile online, indica i dati dell&apos;auto e riceve conferma dall&apos;officina.
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#prenota">
                 Prenota uno slot
               </a>
               <a className="button secondary" href="tel:+39031210622">
-                Parla con l'officina
+                Parla con l&apos;officina
               </a>
             </div>
           </div>
@@ -422,7 +422,7 @@ export default function Home() {
             </div>
             <div className="new-service-point">
               <strong>Richiesta completa</strong>
-              <span>Servizio, telefono, veicolo e note arrivano gia ordinati all'officina.</span>
+              <span>Servizio, telefono, veicolo e note arrivano gia ordinati all&apos;officina.</span>
             </div>
             <div className="new-service-point">
               <strong>Conferma professionale</strong>
@@ -439,7 +439,7 @@ export default function Home() {
             <p>
               Il lavoro viene presentato con chiarezza, eseguito con attenzione tecnica e
               controllato nei dettagli finali: un approccio pensato per chi cerca una
-              carrozzeria affidabile nell'area di Como.
+              carrozzeria affidabile nell&apos;area di Como.
             </p>
           </div>
           <div className="work-grid">
@@ -457,8 +457,8 @@ export default function Home() {
       <section className="process">
         <div className="section-inner">
           <div className="section-head">
-            <h2>Prenotazione online, conferma dall'officina</h2>
-            <p>Il cliente sceglie lo slot dal sito; Borsieri verifica la richiesta e conferma l'appuntamento.</p>
+            <h2>Prenotazione online, conferma dall&apos;officina</h2>
+            <p>Il cliente sceglie lo slot dal sito; Borsieri verifica la richiesta e conferma l&apos;appuntamento.</p>
           </div>
           <div className="steps">
             <div className="step">
@@ -474,7 +474,7 @@ export default function Home() {
             <div className="step">
               <span>03</span>
               <h3>Seleziona lo slot</h3>
-              <p>Il calendario propone fasce coerenti con gli orari di apertura dell'officina.</p>
+              <p>Il calendario propone fasce coerenti con gli orari di apertura dell&apos;officina.</p>
             </div>
             <div className="step">
               <span>04</span>

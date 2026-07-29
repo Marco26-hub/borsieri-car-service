@@ -16,10 +16,16 @@ npm install
 npm run dev
 ```
 
-## Build
+## Build Netlify
 
 ```bash
 npm run build
+```
+
+## Build Sites preview
+
+```bash
+npm run build:sites
 ```
 
 ## Variabili ambiente
