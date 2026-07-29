@@ -215,7 +215,7 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#servizi">
-                Richiedi valutazione carrozzeria
+                Richiedi valutazione in sede
               </a>
               <a className="button secondary" href="#prenota">
                 Prenota cambio gomme
