@@ -8,8 +8,8 @@ const services = [
     image:
       "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=86",
     description:
-      "Riparazioni di carrozzeria eseguite con metodo: valutazione del danno, ripristino dei lamierati, verniciatura e controllo della finitura.",
-    items: ["Ripristino urti, graffi e ammaccature", "Verniciatura e finitura colore", "Grandine, cristalli e pratiche sinistri"],
+      "Un processo tecnico strutturato per valutazione del danno, ripristino dei lamierati, verniciatura e controllo qualita finale.",
+    items: ["Ripristino urti, graffi e ammaccature", "Verniciatura e finitura colore", "Grandine, cristalli e gestione sinistri"],
     primary: true,
   },
   {
@@ -32,10 +32,10 @@ const services = [
 
 const workCards = [
   {
-    label: "Specializzazione storica",
-    title: "Riparazioni di carrozzeria con finitura professionale",
+    label: "Carrozzeria",
+    title: "Ripristini di carrozzeria con controllo qualita",
     text:
-      "Ogni danno viene valutato con attenzione prima dell'intervento: ripristino, verniciatura e finitura sono gestiti con cura per restituire un'auto ordinata, sicura e coerente nel colore.",
+      "Dalla valutazione iniziale alla riconsegna, ogni fase e gestita con criteri tecnici chiari: ripristino, verniciatura, allineamenti e verifica della finitura.",
   },
   {
     label: "Meccanica",
@@ -207,7 +207,7 @@ export default function Home() {
         <div className="hero-inner">
           <div className="hero-copy">
             <div className="eyebrow">Carrozzeria storica vicino a Como</div>
-            <h1>Carrozzeria Borsieri Car Service</h1>
+            <h1>Carrozzeria specializzata Borsieri Car Service</h1>
             <p className="lead">
               Dal 1975, Borsieri mette al centro la riparazione di carrozzeria: danni da urto,
               graffi, grandine, cristalli e verniciatura. A San Fermo della Battaglia, vicino
@@ -215,10 +215,10 @@ export default function Home() {
             </p>
             <div className="hero-actions">
               <a className="button primary" href="#servizi">
-                Valuta un intervento
+                Richiedi valutazione carrozzeria
               </a>
               <a className="button secondary" href="#prenota">
-                Nuovo: prenota cambio gomme
+                Prenota cambio gomme
               </a>
               <a className="button secondary" href="#lavorazioni">
                 Vedi lavorazioni
@@ -340,11 +340,11 @@ export default function Home() {
       <section id="servizi">
         <div className="section-inner">
           <div className="section-head">
-            <h2>Carrozzeria come competenza principale</h2>
+            <h2>Ripristino carrozzeria con processo professionale</h2>
             <p>
-              La carrozzeria e il centro dell'esperienza Borsieri. Meccanica e pneumatici
-              completano il percorso per offrire al cliente un servizio ordinato, coordinato
-              e seguito da un unico referente.
+              La carrozzeria e la specializzazione storica di Borsieri Car Service: analisi
+              del danno, riparazione, verniciatura e controllo finale. Meccanica e pneumatici
+              completano l'assistenza con un unico referente.
             </p>
           </div>
           <div className="services">
