@@ -271,96 +271,121 @@ export default function Home() {
           </div>
 
           <aside className="booking-panel" id="prenota" aria-label="Prenotazione cambio gomme">
-            <img
-              src="https://images.pexels.com/photos/3807329/pexels-photo-3807329.jpeg?auto=compress&cs=tinysrgb&w=1200"
-              alt="Tecnico in officina durante un controllo gomme"
-            />
-            <div className="booking-body">
-              <div className="booking-kicker">Nuovo servizio online</div>
-              <h2>Prenota pneumatici e cambio gomme</h2>
-              <p>
-                Seleziona una fascia disponibile e invia la richiesta. L&apos;officina confermera
-                l&apos;appuntamento in base al tipo di lavorazione e alle note sul veicolo.
-              </p>
-              <div className="booking-calendar">
-                <div className="booking-days" aria-label="Giorni disponibili">
-                  {days.map((day) => {
-                    const dateKey = toDateKey(day);
-                    return (
-                      <button
-                        className={`day-button${dateKey === selectedDate ? " active" : ""}`}
-                        key={dateKey}
-                        onClick={() => {
-                          setSelectedDate(dateKey);
-                          setSelectedTime("");
-                          setConfirmation("");
-                        }}
-                        type="button"
-                      >
-                        <strong>{weekdayFormatter.format(day)}</strong>
-                        <span>{dateFormatter.format(day)}</span>
-                      </button>
-                    );
-                  })}
+            <div className="booking-panel-header">
+              <img
+                src="https://images.pexels.com/photos/3807329/pexels-photo-3807329.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Tecnico in officina durante un controllo gomme"
+              />
+              <div className="booking-intro">
+                <div className="booking-kicker">Nuovo servizio online</div>
+                <h2>Prenota pneumatici e cambio gomme</h2>
+                <p>
+                  Scegli una fascia libera negli orari di apertura. Borsieri verifica la richiesta
+                  e conferma l&apos;appuntamento.
+                </p>
+              </div>
+            </div>
+
+            <div className="booking-card">
+              <div className="booking-card-head">
+                <div>
+                  <span className="booking-card-label">Calendario integrato</span>
+                  <strong>Slot liberi per cambio gomme</strong>
                 </div>
-                <div className="booking-slots" aria-label="Orari disponibili">
-                  {slots.map((slot) => (
-                    <button
-                      aria-label={slot.available ? `Slot libero ${slot.time}` : `Slot occupato ${slot.time}`}
-                      className={`time-button${slot.time === selectedTime ? " active" : ""}`}
-                      disabled={!slot.available}
-                      key={slot.time}
-                      onClick={() => {
-                        setSelectedTime(slot.time);
-                        setConfirmation("");
-                      }}
-                      type="button"
-                    >
-                      {slot.time}
-                    </button>
-                  ))}
-                </div>
-                <div className="booking-summary">
-                  {selectedTime
-                    ? `Hai scelto ${readableDate} alle ${selectedTime}. Completa i dati per inviare la richiesta.`
-                    : `Giorno selezionato: ${readableDate}. Ora scegli uno slot libero.`}
-                </div>
-                <form className="booking-form" onSubmit={handleSubmit}>
-                  <label>
-                    Lavorazione
-                    <select name="service" required>
-                      {bookingServices.map((service) => (
-                        <option key={service} value={service}>
-                          {service}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label>
-                    Nome e cognome
-                    <input name="name" autoComplete="name" required />
-                  </label>
-                  <label>
-                    Telefono
-                    <input name="phone" autoComplete="tel" inputMode="tel" required />
-                  </label>
-                  <label>
-                    Auto
-                    <input name="car" placeholder="Marca, modello, targa opzionale" required />
-                  </label>
-                  <label>
-                    Note
-                    <textarea name="notes" placeholder="Misura gomme, deposito, urgenze" />
-                  </label>
-                  <button className="button primary" disabled={isSubmitting} type="submit">
-                    {isSubmitting ? "Invio in corso" : "Invia richiesta"}
-                  </button>
-                </form>
-                {confirmation ? (
-                  <div className="booking-confirmation visible" role="status">
-                    {confirmation}
+                <span className="booking-card-badge">Lun-Ven</span>
+              </div>
+
+              <div className="booking-card-grid">
+                <div className="booking-date-column">
+                  <div className="booking-group">
+                    <span className="booking-field-title">Scegli giorno</span>
+                    <div className="booking-days" aria-label="Giorni disponibili">
+                      {days.map((day) => {
+                        const dateKey = toDateKey(day);
+                        return (
+                          <button
+                            className={`day-button${dateKey === selectedDate ? " active" : ""}`}
+                            key={dateKey}
+                            onClick={() => {
+                              setSelectedDate(dateKey);
+                              setSelectedTime("");
+                              setConfirmation("");
+                            }}
+                            type="button"
+                          >
+                            <strong>{weekdayFormatter.format(day)}</strong>
+                            <span>{dateFormatter.format(day)}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
-                ) : null}
+
+                  <div className="booking-group">
+                    <span className="booking-field-title">Scegli orario</span>
+                    <div className="booking-slots" aria-label="Orari disponibili">
+                      {slots.map((slot) => (
+                        <button
+                          aria-label={slot.available ? `Slot libero ${slot.time}` : `Slot occupato ${slot.time}`}
+                          className={`time-button${slot.time === selectedTime ? " active" : ""}`}
+                          disabled={!slot.available}
+                          key={slot.time}
+                          onClick={() => {
+                            setSelectedTime(slot.time);
+                            setConfirmation("");
+                          }}
+                          type="button"
+                        >
+                          {slot.time}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="booking-request-column">
+                  <div className="booking-summary">
+                    {selectedTime
+                      ? `Hai scelto ${readableDate} alle ${selectedTime}. Completa i dati per inviare la richiesta.`
+                      : `Giorno selezionato: ${readableDate}. Ora scegli uno slot libero.`}
+                  </div>
+                  <form className="booking-form" onSubmit={handleSubmit}>
+                    <label>
+                      Lavorazione
+                      <select name="service" required>
+                        {bookingServices.map((service) => (
+                          <option key={service} value={service}>
+                            {service}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label>
+                      Nome e cognome
+                      <input name="name" autoComplete="name" required />
+                    </label>
+                    <label>
+                      Telefono
+                      <input name="phone" autoComplete="tel" inputMode="tel" required />
+                    </label>
+                    <label>
+                      Auto
+                      <input name="car" placeholder="Marca, modello, targa opzionale" required />
+                    </label>
+                    <label>
+                      Note
+                      <textarea name="notes" placeholder="Misura gomme, deposito, urgenze" />
+                    </label>
+                    <button className="button primary" disabled={isSubmitting} type="submit">
+                      {isSubmitting ? "Invio in corso" : "Invia richiesta"}
+                    </button>
+                  </form>
+                  {confirmation ? (
+                    <div className="booking-confirmation visible" role="status">
+                      {confirmation}
+                    </div>
+                  ) : null}
+                </div>
               </div>
             </div>
           </aside>
