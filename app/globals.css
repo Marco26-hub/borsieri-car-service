@@ -396,6 +396,7 @@ h1 {
 
 section {
   padding: 58px 16px;
+  scroll-margin-top: 92px;
 }
 
 .section-inner {
@@ -687,6 +688,7 @@ footer {
 
   section {
     padding: 72px 28px;
+    scroll-margin-top: 104px;
   }
 }
 
@@ -799,5 +801,6 @@ footer {
 
   section {
     padding: 84px clamp(32px, 4vw, 56px);
+    scroll-margin-top: 118px;
   }
 }
