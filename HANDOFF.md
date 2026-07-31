@@ -20,6 +20,18 @@ Branch principale:
 main
 ```
 
+Release GitHub verificata:
+
+```text
+commit 4fa122e - Polish premium booking flow and production setup
+```
+
+Anteprima locale aggiornata:
+
+```text
+http://127.0.0.1:8080/
+```
+
 Ultima preview produzione privata:
 
 ```text
@@ -27,6 +39,21 @@ https://borsieri-car-service.beige-fawn-1352.chatgpt.site
 ```
 
 Questa preview non e il dominio ufficiale del cliente. Il sito andra trasferito su Tophost e pubblicato sul dominio ufficiale quando saranno disponibili le credenziali hosting/DNS.
+
+## Verifiche ultima release
+
+Eseguite il 31 luglio 2026 sulla release `4fa122e`:
+
+- `npm run build`: completato con export statico in `out/`.
+- `npm run lint`: completato senza errori o avvisi.
+- `node --test tests/rendered-html.test.mjs`: 3 test superati su 3.
+- Controllo browser desktop e mobile: nessun overflow orizzontale rilevato.
+- CTA `Richiedi preventivo gomme nuove`: apre `/prenotazione-cambio-gomme/?servizio=gomme-nuove#scegli-gomme` e preseleziona `Gomme nuove`.
+- Anchor di navigazione: contenuti posizionati correttamente sotto l'header fisso.
+- Canonical e sitemap: URL coerenti con slash finale e dominio `www`.
+- Dipendenze starter Cloudflare, Vinext, Vite, Drizzle e Tailwind rimosse.
+
+Il test reale di `public/api/preventivo.php` non e eseguibile nel server statico locale e deve essere effettuato su Tophost. `npm audit --omit=dev` segnala tre advisory transitive nei pacchetti di build inclusi da Next.js; il runtime Node e `node_modules` non vengono caricati su Tophost, dove viene pubblicato soltanto l'export statico `out/`.
 
 ## Cosa e gia pronto
 
@@ -87,6 +114,8 @@ Le richieste per gomme nuove vengono inviate a `borsiericar@gmail.com` tramite `
 11. Verificare redirect e canonical su `https://www.borsiericarservice.it`.
 12. Fare test finale da mobile e desktop.
 13. Inviare un preventivo di prova e verificare la ricezione su `borsiericar@gmail.com`.
+14. Verificare su Tophost che `mod_rewrite`, `mod_headers`, `mod_deflate` e `mod_expires` siano disponibili; le direttive sono protette da `IfModule`.
+15. Controllare che il mittente `noreply@borsiericarservice.it` sia autorizzato e non venga classificato come spam.
 
 ## Dati ancora da confermare con cliente
 
