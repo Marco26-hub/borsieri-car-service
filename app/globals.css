@@ -101,6 +101,12 @@ img {
   transform: translateY(-1px);
 }
 
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+  transform: none;
+}
+
 .button.primary {
   background: var(--orange);
   box-shadow: 0 18px 50px rgba(255, 153, 0, 0.26);
@@ -155,6 +161,11 @@ img {
   margin: 0 auto;
   max-width: 1180px;
   position: relative;
+}
+
+.hero-copy {
+  align-self: center;
+  max-width: 800px;
 }
 
 .eyebrow {
@@ -481,6 +492,610 @@ h1 {
   width: 12px;
 }
 
+.booking-spotlight {
+  background: #050505;
+  padding: 0;
+}
+
+.booking-spotlight-link {
+  display: block;
+  min-height: 520px;
+  overflow: hidden;
+  position: relative;
+}
+
+.booking-spotlight-link::before {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.96) 6%, rgba(0, 0, 0, 0.7) 58%, rgba(0, 0, 0, 0.22)),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.72), transparent 52%),
+    url("https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=2400&q=88");
+  background-position: center;
+  background-size: cover;
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: scale(1.02);
+  transition: filter 700ms ease, transform 1100ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.booking-spotlight-link::after {
+  background: linear-gradient(90deg, transparent, rgba(255, 153, 0, 0.2), transparent);
+  content: "";
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-75%);
+  transition: opacity 400ms ease, transform 1100ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.booking-spotlight-link:hover::before,
+.booking-spotlight-link:focus-visible::before {
+  filter: saturate(1.14) contrast(1.04);
+  transform: scale(1.08);
+}
+
+.booking-spotlight-link:hover::after,
+.booking-spotlight-link:focus-visible::after {
+  opacity: 1;
+  transform: translateX(75%);
+}
+
+.booking-spotlight-content {
+  align-content: end;
+  display: grid;
+  margin: 0 auto;
+  min-height: 520px;
+  padding: 54px 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.booking-spotlight-content h2 {
+  font-size: clamp(2.6rem, 15vw, 5.8rem);
+  line-height: 0.9;
+  margin: 0;
+  max-width: 820px;
+  text-transform: uppercase;
+}
+
+.booking-spotlight-content p {
+  color: #e5e5e5;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 18px 0 24px;
+  max-width: 620px;
+}
+
+.booking-spotlight-action {
+  align-items: center;
+  border-bottom: 2px solid var(--orange);
+  color: var(--orange);
+  display: inline-flex;
+  font-size: 0.9rem;
+  font-weight: 900;
+  justify-content: space-between;
+  min-height: 42px;
+  text-transform: uppercase;
+  width: min(100%, 260px);
+}
+
+.swiss-service {
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.07), transparent 54%),
+    #121212;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.swiss-service-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.swiss-service-copy h2 {
+  font-size: clamp(2rem, 10vw, 4rem);
+  line-height: 0.96;
+  margin: 0;
+  max-width: 820px;
+  text-transform: uppercase;
+}
+
+.swiss-service-copy p {
+  color: var(--muted);
+  line-height: 1.58;
+  margin: 18px 0 0;
+  max-width: 680px;
+}
+
+.swiss-service-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.replacement-car-highlight {
+  align-content: end;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.88)),
+    url("/auto-sostitutiva-borsieri.webp");
+  background-position: center;
+  background-size: cover;
+  border: 1px solid rgba(255, 153, 0, 0.36);
+  border-radius: 8px;
+  display: grid;
+  min-height: 360px;
+  padding: 22px;
+}
+
+.replacement-car-highlight span {
+  color: var(--orange);
+  font-size: 0.72rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.replacement-car-highlight strong {
+  font-size: clamp(1.55rem, 7vw, 2.5rem);
+  line-height: 1.02;
+  max-width: 540px;
+  text-transform: uppercase;
+}
+
+.replacement-car-highlight p {
+  color: #d4d4d4;
+  line-height: 1.5;
+  margin: 14px 0 0;
+  max-width: 520px;
+}
+
+.booking-page {
+  background: #070707;
+}
+
+.booking-page-hero {
+  min-height: 78vh;
+  overflow: hidden;
+  padding: 132px 16px 58px;
+  position: relative;
+}
+
+.booking-page-hero::before {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.97), rgba(0, 0, 0, 0.66) 58%, rgba(0, 0, 0, 0.3)),
+    linear-gradient(0deg, #070707, transparent 42%),
+    url("https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=2400&q=90");
+  background-position: center;
+  background-size: cover;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.booking-page-hero-inner {
+  align-content: end;
+  display: grid;
+  margin: 0 auto;
+  min-height: calc(78vh - 190px);
+  position: relative;
+  z-index: 1;
+}
+
+.booking-page-hero h1 {
+  max-width: 880px;
+}
+
+.booking-page-hero p {
+  color: #e2e2e2;
+  font-size: 1.05rem;
+  line-height: 1.56;
+  margin: 20px 0 0;
+  max-width: 680px;
+}
+
+.booking-page-hero .button {
+  margin-top: 24px;
+}
+
+.booking-page-facts {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+  margin-top: 24px;
+  max-width: 760px;
+}
+
+.booking-page-facts span {
+  background: rgba(0, 0, 0, 0.52);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 12px 14px;
+  text-transform: uppercase;
+}
+
+.booking-workspace {
+  background: #0b0b0b;
+  padding-top: 58px;
+}
+
+.booking-workspace-head,
+.tire-configurator-head,
+.new-tire-config-head {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.booking-workspace-head h2,
+.tire-configurator-head h2 {
+  font-size: clamp(2rem, 10vw, 4rem);
+  line-height: 0.96;
+  margin: 6px 0 0;
+  max-width: 740px;
+  text-transform: uppercase;
+}
+
+.booking-workspace-head p,
+.tire-configurator-head p,
+.new-tire-config-head p {
+  color: var(--muted);
+  line-height: 1.52;
+  margin: 0;
+  max-width: 520px;
+}
+
+.tire-configurator {
+  background:
+    linear-gradient(135deg, rgba(255, 153, 0, 0.1), transparent 44%),
+    #111;
+  border: 1px solid rgba(255, 153, 0, 0.34);
+  border-radius: 8px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
+  margin-bottom: 54px;
+  padding: 18px;
+}
+
+.choice-group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.choice-group + .choice-group {
+  border-top: 1px solid rgba(255, 255, 255, 0.11);
+  margin-top: 24px;
+  padding-top: 24px;
+}
+
+.choice-group legend {
+  font-size: 0.8rem;
+  font-weight: 900;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.choice-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr;
+}
+
+.choice-card {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 7px;
+  cursor: pointer;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 20px minmax(0, 1fr);
+  min-height: 58px;
+  padding: 12px 14px;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.choice-card:hover {
+  border-color: rgba(255, 153, 0, 0.6);
+  transform: translateY(-1px);
+}
+
+.choice-card.is-selected {
+  background: rgba(255, 153, 0, 0.13);
+  border-color: var(--orange);
+}
+
+.choice-card input {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.choice-card:has(input:focus-visible) {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.choice-indicator {
+  border: 2px solid #858585;
+  border-radius: 50%;
+  display: block;
+  height: 18px;
+  position: relative;
+  width: 18px;
+}
+
+.choice-card.is-selected .choice-indicator {
+  border-color: var(--orange);
+}
+
+.choice-card.is-selected .choice-indicator::after {
+  background: var(--orange);
+  border-radius: 50%;
+  content: "";
+  inset: 3px;
+  position: absolute;
+}
+
+.choice-card strong {
+  font-size: 0.92rem;
+}
+
+.new-tire-config {
+  background: #090909;
+  border: 1px solid rgba(255, 153, 0, 0.38);
+  border-radius: 8px;
+  margin-top: 24px;
+  padding: 16px;
+}
+
+.new-tire-config-head h3 {
+  font-size: 1.5rem;
+  margin: 6px 0 0;
+  text-transform: uppercase;
+}
+
+.quote-customer-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 22px;
+  padding-top: 22px;
+}
+
+.quote-customer-section h3 {
+  font-size: 1.2rem;
+  margin: 6px 0 16px;
+  text-transform: uppercase;
+}
+
+.tire-form-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+
+.tire-field {
+  display: grid;
+  gap: 7px;
+}
+
+.tire-field span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.tire-field input,
+.tire-field select {
+  appearance: none;
+  background: #171717;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  color: #fff;
+  font: inherit;
+  min-height: 50px;
+  padding: 0 13px;
+  width: 100%;
+}
+
+.tire-field input:focus,
+.tire-field select:focus {
+  border-color: var(--orange);
+  outline: 2px solid rgba(255, 153, 0, 0.2);
+  outline-offset: 2px;
+}
+
+.form-honeypot {
+  height: 1px;
+  left: -10000px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+}
+
+.privacy-consent {
+  align-items: start;
+  color: var(--muted);
+  cursor: pointer;
+  display: grid;
+  font-size: 0.82rem;
+  gap: 10px;
+  grid-template-columns: 20px minmax(0, 1fr);
+  line-height: 1.45;
+  margin-top: 14px;
+}
+
+.privacy-consent input {
+  accent-color: var(--orange);
+  height: 18px;
+  margin: 1px 0 0;
+  width: 18px;
+}
+
+.privacy-consent-row > a {
+  color: var(--orange);
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin: 8px 0 0 30px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.quote-action-panel,
+.configurator-next {
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
+  display: grid;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 14px;
+}
+
+.quote-action-panel div,
+.configurator-next div {
+  display: grid;
+  gap: 5px;
+}
+
+.quote-action-panel span,
+.configurator-next span {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.quote-action-panel strong,
+.configurator-next strong {
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.form-feedback {
+  align-items: start;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 7px;
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 16px;
+}
+
+.form-feedback.is-success {
+  background: rgba(68, 168, 112, 0.12);
+  border-color: rgba(87, 205, 139, 0.42);
+}
+
+.form-feedback.is-error {
+  background: rgba(211, 77, 77, 0.12);
+  border-color: rgba(234, 105, 105, 0.42);
+}
+
+.form-feedback span {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.form-feedback .button {
+  margin-top: 4px;
+}
+
+.booking-calendar-card {
+  margin-top: 0;
+  scroll-margin-top: 112px;
+}
+
+.booking-workspace-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.booking-workspace-calendar-only {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.booking-workspace .google-booking-frame-shell,
+.booking-workspace .google-booking-placeholder {
+  min-height: 760px;
+}
+
+.booking-workspace .google-booking-frame {
+  height: 760px;
+}
+
+.booking-process {
+  background: #ededed;
+  color: #101010;
+}
+
+.booking-process .booking-card-label {
+  color: #c66f00;
+}
+
+.booking-process .booking-workspace-head p,
+.booking-flow-card p {
+  color: #5a5a5a;
+}
+
+.booking-flow-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+.booking-flow-card {
+  border-top: 3px solid var(--orange);
+  padding: 18px 0;
+}
+
+.booking-flow-card > span {
+  color: #c66f00;
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+}
+
+.booking-flow-card h3 {
+  font-size: 1.35rem;
+  margin: 0 0 8px;
+}
+
+.booking-flow-card p {
+  line-height: 1.5;
+  margin: 0;
+}
+
+.booking-contact-band {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.64)),
+    url("https://images.unsplash.com/photo-1606577924006-27d39b132ae2?auto=format&fit=crop&w=2200&q=88");
+  background-position: center;
+  background-size: cover;
+}
+
+.booking-contact-inner {
+  display: grid;
+  gap: 24px;
+}
+
+.booking-contact-inner h2 {
+  font-size: clamp(2rem, 9vw, 4rem);
+  line-height: 1;
+  margin: 8px 0 0;
+  max-width: 780px;
+  text-transform: uppercase;
+}
+
+.booking-contact-actions {
+  display: grid;
+  gap: 10px;
+}
+
 section {
   padding: 58px 16px;
   scroll-margin-top: 92px;
@@ -771,6 +1386,34 @@ footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .booking-spotlight-content,
+  .booking-page-hero-inner {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .booking-page-facts,
+  .choice-grid,
+  .tire-form-grid,
+  .booking-flow-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .quote-action-panel,
+  .configurator-next,
+  .booking-contact-inner {
+    align-items: center;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .swiss-service-actions {
+    display: flex;
+  }
+
+  .booking-contact-actions {
+    grid-template-columns: repeat(2, max-content);
+  }
+
   section {
     padding: 72px 28px;
     scroll-margin-top: 104px;
@@ -805,7 +1448,7 @@ footer {
   .hero-inner {
     align-items: center;
     gap: 36px;
-    grid-template-columns: minmax(0, 0.9fr) minmax(430px, 0.64fr);
+    grid-template-columns: minmax(0, 1fr);
     min-height: calc(92vh - 192px);
   }
 
@@ -831,6 +1474,62 @@ footer {
     align-self: center;
   }
 
+  .booking-spotlight-link,
+  .booking-spotlight-content {
+    min-height: 620px;
+  }
+
+  .booking-spotlight-content,
+  .booking-page-hero-inner {
+    max-width: 1180px;
+    padding-left: clamp(32px, 4vw, 56px);
+    padding-right: clamp(32px, 4vw, 56px);
+  }
+
+  .booking-page-hero {
+    min-height: 82vh;
+    padding: 148px clamp(32px, 4vw, 56px) 70px;
+  }
+
+  .booking-page-hero-inner {
+    min-height: calc(82vh - 218px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .booking-page-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .booking-workspace-head,
+  .tire-configurator-head,
+  .new-tire-config-head {
+    align-items: end;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.64fr);
+    justify-content: space-between;
+  }
+
+  .tire-configurator,
+  .new-tire-config {
+    padding: 24px;
+  }
+
+  .choice-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .choice-grid-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .tire-form-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .booking-flow-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .booking-panel-header {
     grid-template-columns: 108px minmax(0, 1fr);
   }
@@ -849,6 +1548,11 @@ footer {
 
   .new-service-grid {
     grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.75fr);
+  }
+
+  .swiss-service-grid {
+    align-items: stretch;
+    grid-template-columns: minmax(0, 0.92fr) minmax(380px, 0.72fr);
   }
 
   .contact-grid {

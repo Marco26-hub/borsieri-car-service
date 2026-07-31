@@ -26,7 +26,7 @@ Ultima preview produzione privata:
 https://borsieri-car-service.beige-fawn-1352.chatgpt.site
 ```
 
-Questa preview non e il dominio ufficiale del cliente. Il sito andra pubblicato sul dominio ufficiale quando saranno disponibili credenziali Netlify/DNS.
+Questa preview non e il dominio ufficiale del cliente. Il sito andra trasferito su Tophost e pubblicato sul dominio ufficiale quando saranno disponibili le credenziali hosting/DNS.
 
 ## Cosa e gia pronto
 
@@ -36,6 +36,9 @@ Questa preview non e il dominio ufficiale del cliente. Il sito andra pubblicato 
 - Posizionamento professionale su carrozzeria specializzata.
 - Sezioni per carrozzeria, meccanica, pneumatici e lavorazioni.
 - Nuovo servizio di prenotazione cambio gomme evidenziato.
+- Pagina dedicata `/prenotazione-cambio-gomme` con menu selezionabile dal cliente.
+- Configuratore gomme nuove e richiesta preventivo inviata dal sito tramite PHP Tophost.
+- Sezione clienti dalla Svizzera con auto sostitutiva su richiesta.
 - Calendario Google Appointment Schedule integrato direttamente nel sito.
 - CTA collegate: valutazione in sede, prenotazione cambio gomme, lavorazioni, telefono, email e indicazioni Google Maps.
 - SEO/GEO tecnico: metadata, canonical, Open Graph, sitemap, robots e schema LocalBusiness/AutoBodyShop.
@@ -44,7 +47,7 @@ Questa preview non e il dominio ufficiale del cliente. Il sito andra pubblicato 
 
 ## Comportamento del form prenotazioni
 
-La prenotazione cambio gomme usa Google Calendar Appointment Schedule. Il cliente completa la booking page Google direttamente dentro al sito, senza uscire dalla landing.
+La prenotazione cambio gomme usa Google Calendar Appointment Schedule. Il cliente completa la booking page Google direttamente nella pagina dedicata, senza uscire dal sito.
 
 ```text
 NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL
@@ -52,27 +55,30 @@ NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL
 
 Se la variabile non e configurata, il sito mostra una card professionale di collegamento calendario e una CTA telefonica.
 
-Nel modulo Google vanno aggiunti flag chiari:
+Prima del calendario il sito propone flag chiari:
 
 - `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
 - `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
 - `Gomme nuove`: tipo gomma estiva/invernale/4 stagioni, larghezza, spalla, diametro, indice carico/velocita e fascia preferita.
 - `Rubrica cliente`: telefono, auto, targa opzionale e note.
 
+Le richieste per gomme nuove vengono inviate a `borsiericar@gmail.com` tramite `public/api/preventivo.php`. Su Tophost va verificato che PHP `mail()` invii correttamente e che il mittente `noreply@borsiericarservice.it` sia accettato.
+
 ## Cosa resta da fare quando arrivano le credenziali
 
-1. Collegare il repository GitHub a Netlify.
+1. Accedere al pannello Tophost e alla gestione file/FTP del dominio.
 2. Creare in Google Calendar una booking page dedicata al cambio gomme.
 3. Configurare disponibilita, durata slot, buffer, limiti giornalieri e promemoria.
-4. Aggiungere alla booking page i flag `Tipo intervento`, `Gestione pneumatici` e i campi rubrica cliente.
+4. Aggiungere alla booking page Google i soli campi necessari alla conferma dello slot.
 5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
-6. Inserire in Netlify `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
-7. Fare deploy Netlify.
+6. Impostare `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL` in locale prima della build.
+7. Eseguire `npm run build` e caricare il contenuto di `out/` su Tophost.
 8. Testare una prenotazione reale e verificare che compaia nel calendario Google del cliente.
 9. Collegare `borsiericarservice.it` e `www.borsiericarservice.it`.
-10. Aggiornare DNS secondo le istruzioni Netlify.
+10. Aggiornare DNS secondo le istruzioni Tophost.
 11. Verificare redirect e canonical su `https://www.borsiericarservice.it`.
 12. Fare test finale da mobile e desktop.
+13. Inviare un preventivo di prova e verificare la ricezione su `borsiericar@gmail.com`.
 
 ## Dati ancora da confermare con cliente
 
@@ -103,12 +109,6 @@ Build:
 
 ```bash
 npm run build
-```
-
-Build preview Sites:
-
-```bash
-npm run build:sites
 ```
 
 Stato Git:

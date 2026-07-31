@@ -63,7 +63,14 @@ const localBusinessSchema = {
     postalCode: "22042",
     addressCountry: "IT",
   },
-  areaServed: ["San Fermo della Battaglia", "Como", "Cavallasca", "Provincia di Como"],
+  areaServed: [
+    "San Fermo della Battaglia",
+    "Como",
+    "Cavallasca",
+    "Provincia di Como",
+    "Canton Ticino",
+    "Svizzera",
+  ],
   openingHours: ["Mo-Fr 08:00-12:00", "Mo-Fr 14:00-18:30"],
   makesOffer: [
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Riparazione carrozzeria" } },
@@ -71,57 +78,11 @@ const localBusinessSchema = {
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Riparazione danni da grandine" } },
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Officina meccanica" } },
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cambio gomme" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Auto sostitutiva su richiesta" } },
   ],
 };
 
-const bookingDirectoryGroups = [
-  {
-    title: "Tipo intervento",
-    items: ["Cambio gomme", "Riparazione gomma", "Sola convergenza"],
-  },
-  {
-    title: "Gestione pneumatici",
-    items: ["Gomme sue", "Gomme nuove", "Gomme in magazzino", "Gomme da portare"],
-  },
-  {
-    title: "Gomme nuove",
-    items: [
-      "Tipo gomma: estiva, invernale, 4 stagioni",
-      "Misura: larghezza / spalla / diametro",
-      "Indice carico e velocita",
-      "Preferenza fascia: premium, quality, economy",
-    ],
-  },
-  {
-    title: "Rubrica cliente",
-    items: ["Telefono", "Auto", "Targa opzionale", "Note"],
-  },
-];
-
-const appointmentFlowItems = [
-  { label: "Slot", text: "Il cliente seleziona data e orario dal calendario Google." },
-  { label: "Flag", text: "Borsieri riceve lavorazione, provenienza gomme e dati veicolo." },
-  { label: "Conferma", text: "L'appuntamento entra nel calendario del cliente con notifica." },
-];
-
-function buildGoogleAppointmentUrl(value?: string) {
-  if (!value) return "";
-
-  try {
-    const url = new URL(value);
-    if (!url.hostname.endsWith("calendar.google.com")) return "";
-    if (!url.searchParams.has("gv")) {
-      url.searchParams.set("gv", "true");
-    }
-    return url.toString();
-  } catch {
-    return "";
-  }
-}
-
 export default function Home() {
-  const googleAppointmentUrl = buildGoogleAppointmentUrl(process.env.NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL);
-
   return (
     <main id="top">
       <script
@@ -135,11 +96,11 @@ export default function Home() {
         <nav className="nav" aria-label="Navigazione principale">
           <a href="#servizi">Carrozzeria</a>
           <a href="#lavorazioni">Lavorazioni</a>
-          <a href="#prenota">Cambio gomme</a>
+          <a href="/prenotazione-cambio-gomme">Cambio gomme</a>
           <a href="#contatti">Contatti</a>
         </nav>
-        <a className="button primary" href="#prenota">
-          Nuovo: prenota gomme
+        <a className="button primary" href="/prenotazione-cambio-gomme">
+          Prenota gomme
         </a>
       </header>
 
@@ -157,7 +118,7 @@ export default function Home() {
               <a className="button primary" href="#servizi">
                 Richiedi valutazione in sede
               </a>
-              <a className="button secondary" href="#prenota">
+              <a className="button secondary" href="/prenotazione-cambio-gomme">
                 Prenota cambio gomme
               </a>
               <a className="button secondary" href="#lavorazioni">
@@ -180,83 +141,21 @@ export default function Home() {
             </div>
           </div>
 
-          <aside className="booking-panel" id="prenota" aria-label="Prenotazione cambio gomme">
-            <div className="booking-panel-header">
-              <img
-                src="https://images.pexels.com/photos/3807329/pexels-photo-3807329.jpeg?auto=compress&cs=tinysrgb&w=1200"
-                alt="Tecnico in officina durante un controllo gomme"
-              />
-              <div className="booking-intro">
-                <div className="booking-kicker">Nuovo servizio online</div>
-                <h2>Prenota pneumatici e cambio gomme</h2>
-                <p>
-                  Scegli una fascia libera dal calendario Google dell&apos;officina e completa i dati
-                  richiesti per la conferma.
-                </p>
-              </div>
-            </div>
-
-            <div className="booking-card">
-              <div className="booking-card-head">
-                <div>
-                  <span className="booking-card-label">Google Calendar</span>
-                  <strong>Pagina prenotazioni cambio gomme</strong>
-                </div>
-                <span className="booking-card-badge">Online</span>
-              </div>
-
-              <div className="google-booking-layout">
-                <div className="google-booking-frame-shell">
-                  {googleAppointmentUrl ? (
-                    <iframe
-                      className="google-booking-frame"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      src={googleAppointmentUrl}
-                      title="Prenotazione cambio gomme Borsieri Car Service"
-                    />
-                  ) : (
-                    <div className="google-booking-placeholder">
-                      <strong>Calendario Google pronto al collegamento</strong>
-                      <p>
-                        Quando viene inserito il link della booking page Google, qui compariranno
-                        slot liberi, modulo cliente e conferma appuntamento.
-                      </p>
-                      <a className="button secondary" href="tel:+39031210622">
-                        Prenota telefonicamente
-                      </a>
-                    </div>
-                  )}
-                </div>
-
-                <div className="booking-directory">
-                  <span className="booking-field-title">Gestione appuntamento</span>
-                  <h3>Menu chiaro per gomme e lavorazioni</h3>
-                  <div className="appointment-flow" aria-label="Flusso appuntamento">
-                    {appointmentFlowItems.map((item) => (
-                      <div className="appointment-flow-item" key={item.label}>
-                        <strong>{item.label}</strong>
-                        <span>{item.text}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="booking-directory-groups">
-                    {bookingDirectoryGroups.map((group) => (
-                      <div className="booking-directory-group" key={group.title}>
-                        <strong>{group.title}</strong>
-                        <ul>
-                          {group.items.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
+      </section>
+
+      <section className="booking-spotlight" aria-label="Prenotazione cambio gomme online">
+        <a className="booking-spotlight-link" href="/prenotazione-cambio-gomme">
+          <div className="booking-spotlight-content">
+            <span className="new-service-label">Nuovo servizio online</span>
+            <h2>Prenota cambio gomme</h2>
+            <p>
+              Consulta gli slot disponibili, indica il tipo di intervento e completa la
+              richiesta direttamente sul sito.
+            </p>
+            <span className="booking-spotlight-action">Apri il calendario</span>
+          </div>
+        </a>
       </section>
 
       <section id="servizi">
@@ -288,38 +187,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="new-service" aria-label="Nuovo servizio di prenotazione cambio gomme">
-        <div className="section-inner new-service-grid">
-          <div className="new-service-copy">
-            <div className="new-service-label">Nuovo servizio</div>
-            <h2>Prenotazione cambio gomme direttamente dal sito</h2>
+      <section className="swiss-service" aria-labelledby="swiss-service-title">
+        <div className="section-inner swiss-service-grid">
+          <div className="swiss-service-copy">
+            <div className="eyebrow">Servizio dedicato ai clienti dalla Svizzera</div>
+            <h2 id="swiss-service-title">Assistenza organizzata anche oltre confine</h2>
             <p>
-              Borsieri Car Service affianca alla propria competenza di carrozzeria un nuovo
-              servizio digitale per pneumatici e cambio gomme. Il cliente sceglie una fascia
-              disponibile online, indica i dati dell&apos;auto e riceve conferma dall&apos;officina.
+              Borsieri Car Service accoglie clienti residenti in Svizzera che scelgono la
+              carrozzeria e l&apos;officina di San Fermo della Battaglia. L&apos;intervento puo essere
+              pianificato in anticipo con un referente dedicato.
             </p>
-            <div className="hero-actions">
-              <a className="button primary" href="#prenota">
-                Prenota uno slot
+            <div className="swiss-service-actions">
+              <a
+                className="button primary"
+                href="mailto:borsiericar@gmail.com?subject=Richiesta%20assistenza%20cliente%20dalla%20Svizzera"
+              >
+                Organizza l&apos;intervento
               </a>
               <a className="button secondary" href="tel:+39031210622">
-                Parla con l&apos;officina
+                Parla con Borsieri
               </a>
             </div>
           </div>
-          <div className="new-service-points">
-            <div className="new-service-point">
-              <strong>Slot negli orari di apertura</strong>
-              <span>Fasce disponibili dal lunedi al venerdi, mattina e pomeriggio.</span>
-            </div>
-            <div className="new-service-point">
-              <strong>Richiesta completa</strong>
-              <span>Servizio, telefono, veicolo e note arrivano gia ordinati all&apos;officina.</span>
-            </div>
-            <div className="new-service-point">
-              <strong>Conferma professionale</strong>
-              <span>Borsieri verifica la richiesta e conferma appuntamento e dettagli.</span>
-            </div>
+          <div className="replacement-car-highlight">
+            <span>Mobilita durante la lavorazione</span>
+            <strong>Auto sostitutiva anche per residenti in Svizzera</strong>
+            <p>
+              Disponibile su richiesta e previa conferma, in base alla durata dell&apos;intervento e
+              alla disponibilita dei veicoli.
+            </p>
           </div>
         </div>
       </section>
@@ -342,37 +238,6 @@ export default function Home() {
                 <p>{card.text}</p>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="process">
-        <div className="section-inner">
-          <div className="section-head">
-            <h2>Prenotazione online, conferma dall&apos;officina</h2>
-            <p>Il cliente sceglie lo slot dal sito; Borsieri verifica la richiesta e conferma l&apos;appuntamento.</p>
-          </div>
-          <div className="steps">
-            <div className="step">
-              <span>01</span>
-              <h3>Scegli la lavorazione</h3>
-              <p>Seleziona cambio stagionale, montaggio, equilibratura, convergenza o deposito gomme.</p>
-            </div>
-            <div className="step">
-              <span>02</span>
-              <h3>Indica i dati auto</h3>
-              <p>Marca, modello, misura pneumatici e note aiutano a preparare correttamente il lavoro.</p>
-            </div>
-            <div className="step">
-              <span>03</span>
-              <h3>Seleziona lo slot</h3>
-              <p>Il calendario propone fasce coerenti con gli orari di apertura dell&apos;officina.</p>
-            </div>
-            <div className="step">
-              <span>04</span>
-              <h3>Attendi conferma</h3>
-              <p>La richiesta viene presa in carico e puo essere confermata o riprogrammata.</p>
-            </div>
           </div>
         </div>
       </section>

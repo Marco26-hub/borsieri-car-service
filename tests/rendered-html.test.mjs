@@ -2,25 +2,10 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-async function render() {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+async function render(pathname = "/") {
+  const htmlPath = pathname === "/" ? "../out/index.html" : `../out${pathname}/index.html`;
+  const html = await readFile(new URL(htmlPath, import.meta.url), "utf8");
+  return new Response(html, { headers: { "content-type": "text/html; charset=utf-8" } });
 }
 
 test("server-renders the Borsieri landing with SEO-critical content", async () => {
@@ -37,18 +22,12 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Carrozzeria specializzata Borsieri Car Service/);
   assert.match(html, /San Fermo della Battaglia/);
   assert.match(html, /Ripristino carrozzeria con processo professionale/);
-  assert.match(html, /Prenota pneumatici e cambio gomme/);
+  assert.match(html, /Prenota cambio gomme/);
   assert.match(html, /Nuovo servizio online/);
-  assert.match(html, /Google Calendar/);
-  assert.match(html, /Gestione appuntamento/);
-  assert.match(html, /Menu chiaro per gomme e lavorazioni/);
-  assert.match(html, /Riparazione gomma/);
-  assert.match(html, /Sola convergenza/);
-  assert.match(html, /Gomme in magazzino/);
-  assert.match(html, /Gomme da portare/);
-  assert.match(html, /Tipo gomma: estiva, invernale, 4 stagioni/);
-  assert.match(html, /Misura: larghezza \/ spalla \/ diametro/);
-  assert.match(html, /Indice carico e velocita/);
+  assert.match(html, /href="\/prenotazione-cambio-gomme"/);
+  assert.match(html, /Apri il calendario/);
+  assert.match(html, /Servizio dedicato ai clienti dalla Svizzera/);
+  assert.match(html, /Auto sostitutiva anche per residenti in Svizzera/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);
@@ -57,31 +36,63 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.doesNotMatch(html, /Your site is taking shape|Building your site|Codex/i);
 });
 
-test("keeps Netlify and production handoff configuration in sync", async () => {
-  const [netlifyConfig, packageJson, handoff, checklist, page, envExample] =
+test("renders the dedicated tire booking page and selectable service structure", async () => {
+  const response = await render("/prenotazione-cambio-gomme");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /<title>Prenotazione cambio gomme \| Borsieri Car Service<\/title>/i);
+  assert.match(html, /Configura il servizio/);
+  assert.match(html, /Tipo di intervento/);
+  assert.match(html, /Cambio gomme/);
+  assert.match(html, /Riparazione gomma/);
+  assert.match(html, /Sola convergenza/);
+  assert.match(html, /Gestione pneumatici/);
+  assert.match(html, /Gomme nuove/);
+  assert.match(html, /Gomme in magazzino/);
+  assert.match(html, /Gomme da portare/);
+  assert.match(html, /Scegli data e orario/);
+  assert.match(html, /Google Calendar/);
+  assert.match(html, /Calendario Google pronto al collegamento/);
+});
+
+test("keeps Tophost and production handoff configuration in sync", async () => {
+  const [nextConfig, packageJson, handoff, checklist, page, bookingPage, configurator, quoteEndpoint, htaccess, envExample] =
     await Promise.all([
-      readFile(new URL("../netlify.toml", import.meta.url), "utf8"),
+      readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
       readFile(new URL("../package.json", import.meta.url), "utf8"),
       readFile(new URL("../HANDOFF.md", import.meta.url), "utf8"),
       readFile(new URL("../GO_LIVE_CHECKLIST.md", import.meta.url), "utf8"),
       readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/prenotazione-cambio-gomme/page.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/prenotazione-cambio-gomme/BookingConfigurator.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../public/api/preventivo.php", import.meta.url), "utf8"),
+      readFile(new URL("../public/.htaccess", import.meta.url), "utf8"),
       readFile(new URL("../.env.example", import.meta.url), "utf8"),
     ]);
 
-  assert.match(netlifyConfig, /command = "npm run build"/);
-  assert.match(netlifyConfig, /publish = "\.next"/);
+  assert.match(nextConfig, /output: "export"/);
+  assert.match(nextConfig, /trailingSlash: true/);
   assert.match(packageJson, /"build": "next build"/);
-  assert.match(packageJson, /"build:sites": "WRANGLER_LOG_PATH=\.wrangler\/wrangler\.log vinext build"/);
-  assert.match(handoff, /Collegare il repository GitHub a Netlify/);
-  assert.match(checklist, /Creare progetto Netlify collegato al repository GitHub/);
+  assert.match(handoff, /Tophost/);
+  assert.match(checklist, /Tophost/);
   assert.match(checklist, /Google Calendar Appointment Schedule/);
   assert.match(checklist, /Tipo intervento/);
   assert.match(checklist, /Gestione pneumatici/);
   assert.match(checklist, /Gomme nuove/);
 
-  assert.match(page, /id="prenota"/);
-  assert.match(page, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
-  assert.match(page, /buildGoogleAppointmentUrl/);
+  assert.match(page, /\/prenotazione-cambio-gomme/);
+  assert.doesNotMatch(page, /id="prenota"/);
+  assert.match(bookingPage, /id="prenota"/);
+  assert.match(bookingPage, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
+  assert.match(bookingPage, /buildGoogleAppointmentUrl/);
+  assert.match(configurator, /name="intervention"/);
+  assert.match(configurator, /name="tire-management"/);
+  assert.match(configurator, /Richiedi preventivo/);
+  assert.match(configurator, /fetch\("\/api\/preventivo\.php"/);
+  assert.match(quoteEndpoint, /borsiericar@gmail\.com/);
+  assert.match(quoteEndpoint, /mail\(\$recipient/);
+  assert.match(htaccess, /RewriteCond %\{HTTPS\} !=on/);
   assert.doesNotMatch(page, /fetch\("\/api\/appointments"/);
   assert.match(envExample, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
 });

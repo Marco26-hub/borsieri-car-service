@@ -7,7 +7,8 @@ Sito production-ready per Borsieri Car Service S.r.l., carrozzeria specializzata
 - Next.js/Vinext
 - TypeScript
 - Google Calendar Appointment Schedule inline per prenotazione cambio gomme
-- Hosting previsto: Netlify sul dominio ufficiale `borsiericarservice.it`
+- Form preventivo pneumatici con endpoint PHP
+- Hosting previsto: Tophost sul dominio ufficiale `borsiericarservice.it`
 
 ## Setup locale
 
@@ -16,16 +17,18 @@ npm install
 npm run dev
 ```
 
-## Build Netlify
+## Build Tophost
 
 ```bash
 npm run build
 ```
 
-## Build Sites preview
+La build statica viene generata in `out/`. Caricare il contenuto di questa cartella nella document root del dominio Tophost. L'endpoint `out/api/preventivo.php` richiede PHP con funzione `mail()` attiva.
+
+## Anteprima locale
 
 ```bash
-npm run build:sites
+npm run preview
 ```
 
 ## Variabili ambiente
@@ -34,7 +37,7 @@ Copia `.env.example` in `.env.local` e imposta:
 
 - `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`
 
-Non committare file `.env*` reali.
+La variabile viene incorporata durante la build, quindi va impostata prima di eseguire `npm run build`. Non committare file `.env*` reali.
 
 ## Google Calendar
 
