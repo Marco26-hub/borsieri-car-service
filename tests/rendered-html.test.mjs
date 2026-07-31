@@ -40,6 +40,8 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Prenota pneumatici e cambio gomme/);
   assert.match(html, /Nuovo servizio online/);
   assert.match(html, /Richiedi valutazione in sede/);
+  assert.match(html, /borsiericar@gmail\.com/);
+  assert.doesNotMatch(html, /info@borsiericarservice\.it/);
   assert.match(html, /"@type":"AutoBodyShop"/);
   assert.match(html, /"addressLocality":"San Fermo della Battaglia"/);
   assert.doesNotMatch(html, /Your site is taking shape|Building your site|Codex/i);

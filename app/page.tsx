@@ -66,7 +66,7 @@ const localBusinessSchema = {
   name: "Borsieri Car Service S.r.l.",
   url: "https://www.borsiericarservice.it/",
   telephone: "+39031210622",
-  email: "info@borsiericarservice.it",
+  email: "borsiericar@gmail.com",
   vatID: "IT03996560136",
   address: {
     "@type": "PostalAddress",
@@ -527,7 +527,7 @@ export default function Home() {
             </div>
             <div className="contact-item">
               <span>Email</span>
-              <a href="mailto:info@borsiericarservice.it">info@borsiericarservice.it</a>
+              <a href="mailto:borsiericar@gmail.com">borsiericar@gmail.com</a>
             </div>
             <div className="contact-item">
               <span>Orari</span>
@@ -542,7 +542,7 @@ export default function Home() {
               >
                 Apri le indicazioni
               </a>
-              <a className="button secondary" href="mailto:info@borsiericarservice.it">
+              <a className="button secondary" href="mailto:borsiericar@gmail.com">
                 Richiedi informazioni
               </a>
             </div>
