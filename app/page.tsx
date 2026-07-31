@@ -1,46 +1,31 @@
-const services = [
-  {
-    title: "Carrozzeria specializzata",
-    image: "/servizio-carrozzeria.webp",
-    description:
-      "Un processo tecnico strutturato per valutazione del danno, ripristino dei lamierati, verniciatura e controllo qualita finale.",
-    items: ["Ripristino urti, graffi e ammaccature", "Verniciatura e finitura colore", "Grandine, cristalli e gestione sinistri"],
-    primary: true,
-  },
-  {
-    title: "Officina meccanica",
-    image: "/servizio-meccanica.webp",
-    description:
-      "Controlli meccanici, diagnosi e manutenzione per completare l'intervento sull'auto con un unico referente.",
-    items: ["Tagliandi e manutenzione programmata", "Diagnosi elettronica e controlli", "Freni, sospensioni e climatizzazione"],
-  },
-  {
-    title: "Gommista e pneumatici",
-    image: "/servizio-pneumatici.webp",
-    description:
-      "Servizio pneumatici per cambio stagione, sicurezza su strada e corretta usura delle gomme.",
-    items: ["Cambio gomme estive e invernali", "Equilibratura, convergenza e assetto", "Riparazione e deposito pneumatici"],
-  },
+/* eslint-disable @next/next/no-img-element -- Static Tophost export uses hand-authored WebP sources. */
+import { CookieSettingsLink } from "./CookieConsent";
+
+const bodyworkItems = [
+  "Ripristino urti, graffi e ammaccature",
+  "Preparazione, verniciatura e finitura colore",
+  "Danni da grandine e sostituzione cristalli",
+  "Gestione tecnica delle pratiche di sinistro",
 ];
 
 const workCards = [
   {
-    label: "Carrozzeria",
-    title: "Ripristini di carrozzeria con controllo qualita",
+    label: "Valutazione",
+    title: "Analisi tecnica e priorita chiare",
     text:
-      "Dalla valutazione iniziale alla riconsegna, ogni fase e gestita con criteri tecnici chiari: ripristino, verniciatura, allineamenti e verifica della finitura.",
+      "Il veicolo viene esaminato per definire lavorazioni, tempi e coordinamento tra carrozzeria, meccanica e pneumatici.",
   },
   {
-    label: "Meccanica",
-    title: "Manutenzione e diagnosi con un unico referente",
+    label: "Intervento",
+    title: "Lavorazioni coordinate da un referente",
     text:
-      "Tagliandi, controlli meccanici, impianto frenante, sospensioni, elettronica e ricarica clima completano il servizio quando l'auto richiede piu di una riparazione estetica.",
+      "Ogni fase viene pianificata e seguita con criteri tecnici coerenti, mantenendo il cliente aggiornato sul lavoro.",
   },
   {
-    label: "Cambio gomme",
-    title: "Pneumatici e cambio gomme con prenotazione online",
+    label: "Consegna",
+    title: "Controllo finale e riconsegna ordinata",
     text:
-      "Il calendario integrato consente di richiedere uno slot per sostituzione stagionale, montaggio pneumatici nuovi, equilibratura, convergenza e deposito gomme.",
+      "Prima della riconsegna vengono verificati intervento, finiture e funzionalita interessate dalla lavorazione.",
   },
 ];
 
@@ -113,7 +98,10 @@ export default function Home() {
               a Como, completa il servizio con officina meccanica e pneumatici.
             </p>
             <div className="hero-actions">
-              <a className="button primary" href="#servizi">
+              <a
+                className="button primary"
+                href="mailto:borsiericar@gmail.com?subject=Richiesta%20valutazione%20carrozzeria%20in%20sede"
+              >
                 Richiedi valutazione in sede
               </a>
               <a className="button secondary" href="#meccanica">
@@ -145,90 +133,100 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="booking-spotlight" aria-label="Prenotazione cambio gomme online">
-        <a className="booking-spotlight-link" href="/prenotazione-cambio-gomme">
-          <div className="booking-spotlight-content">
-            <span className="new-service-label">Nuovo servizio online</span>
-            <h2>Prenota cambio gomme</h2>
+      <section className="bodywork-focus" id="servizi">
+        <div className="section-inner bodywork-focus-content">
+          <div className="bodywork-focus-copy">
+            <div className="eyebrow">Processo carrozzeria</div>
+            <h2>Dalla preparazione alla finitura</h2>
             <p>
-              Consulta gli slot disponibili, indica il tipo di intervento e completa la
-              richiesta direttamente sul sito.
-            </p>
-            <span className="booking-spotlight-action">Apri il calendario</span>
-          </div>
-        </a>
-      </section>
-
-      <section id="servizi">
-        <div className="section-inner">
-          <div className="section-head">
-            <h2>Ripristino carrozzeria con processo professionale</h2>
-            <p>
-              La carrozzeria e la specializzazione storica di Borsieri Car Service: analisi
-              del danno, riparazione, verniciatura e controllo finale. Meccanica e pneumatici
-              completano l&apos;assistenza con un unico referente.
+              Ogni ripristino segue una sequenza precisa: analisi del danno, lavorazione dei
+              lamierati, preparazione delle superfici, verniciatura e controllo della finitura.
             </p>
           </div>
-          <div className="services">
-            {services.map((service) => (
-              <article className={`service${service.primary ? " primary-service" : ""}`} key={service.title}>
-                <img src={service.image} alt={`${service.title} Borsieri Car Service`} />
-                <div>
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                  <ul className="service-list">
-                    {service.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
+          <ol className="bodywork-list" aria-label="Competenze di carrozzeria">
+            {bodyworkItems.map((item, index) => (
+              <li key={item}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item}</strong>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
       <section className="mechanic-focus" id="meccanica">
-        <div className="section-inner mechanic-focus-grid">
-          <div className="mechanic-focus-media">
-            <img
-              src="/servizio-meccanica.webp"
-              alt="Tecnico Borsieri durante un intervento nel vano motore"
-            />
+        <div className="mechanic-cinematic-scene">
+          <img
+            className="mechanic-cinematic-image"
+            src="/servizio-meccanica.webp"
+            srcSet="/servizio-meccanica-mobile.webp 900w, /servizio-meccanica.webp 1568w"
+            sizes="100vw"
+            alt="Tecnico Borsieri durante un intervento nel vano motore"
+            decoding="async"
+            loading="lazy"
+          />
+          <div className="section-inner mechanic-focus-content">
+            <div className="mechanic-focus-copy">
+              <div className="eyebrow">Officina meccanica</div>
+              <h2>Diagnosi e manutenzione con competenza tecnica</h2>
+              <p>
+                L&apos;area meccanica completa il servizio Borsieri con controlli accurati,
+                manutenzione programmata e interventi sui principali sistemi del veicolo. Un unico
+                referente coordina diagnosi, lavorazione e verifica finale.
+              </p>
+              <div className="mechanic-capabilities" aria-label="Servizi di officina meccanica">
+                <div>
+                  <strong>Diagnosi e controlli</strong>
+                  <span>Elettronica, livelli, componenti e verifica delle anomalie.</span>
+                </div>
+                <div>
+                  <strong>Manutenzione programmata</strong>
+                  <span>Tagliandi e interventi periodici secondo le esigenze del veicolo.</span>
+                </div>
+                <div>
+                  <strong>Sicurezza e comfort</strong>
+                  <span>Freni, sospensioni, climatizzazione e controlli funzionali.</span>
+                </div>
+              </div>
+              <div className="mechanic-focus-actions">
+                <a
+                  className="button primary"
+                  href="mailto:borsiericar@gmail.com?subject=Richiesta%20intervento%20meccanico"
+                >
+                  Richiedi un controllo
+                </a>
+                <a className="button secondary" href="tel:+39031210622">
+                  Chiama l&apos;officina
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="mechanic-focus-copy">
-            <div className="eyebrow">Officina meccanica</div>
-            <h2>Diagnosi e manutenzione con competenza tecnica</h2>
+        </div>
+      </section>
+
+      <section className="booking-spotlight" aria-label="Prenotazione cambio gomme online">
+        <div className="booking-spotlight-link">
+          <div className="booking-spotlight-content">
+            <span className="new-service-label">Servizio pneumatici · Offerta web</span>
+            <h2>Gomme nuove, preventivo su misura.</h2>
+            <div className="booking-offer-lockup" aria-label="Sconto del 10% sulle gomme nuove">
+              <strong>-10%</strong>
+              <span>Sugli pneumatici nuovi per le richieste inviate dal sito</span>
+            </div>
             <p>
-              L&apos;area meccanica completa il servizio Borsieri con controlli accurati,
-              manutenzione programmata e interventi sui principali sistemi del veicolo. Un unico
-              referente coordina diagnosi, lavorazione e verifica finale.
+              Indica misura, tipologia e fascia preferita. Borsieri preparera una proposta
+              dedicata; la prenotazione dell&apos;appuntamento resta libera e separata.
             </p>
-            <div className="mechanic-capabilities" aria-label="Servizi di officina meccanica">
-              <div>
-                <strong>Diagnosi e controlli</strong>
-                <span>Elettronica, livelli, componenti e verifica delle anomalie.</span>
-              </div>
-              <div>
-                <strong>Manutenzione programmata</strong>
-                <span>Tagliandi e interventi periodici secondo le esigenze del veicolo.</span>
-              </div>
-              <div>
-                <strong>Sicurezza e comfort</strong>
-                <span>Freni, sospensioni, climatizzazione e controlli funzionali.</span>
-              </div>
-            </div>
-            <div className="mechanic-focus-actions">
-              <a
-                className="button primary"
-                href="mailto:borsiericar@gmail.com?subject=Richiesta%20intervento%20meccanico"
-              >
-                Richiedi un controllo
-              </a>
-              <a className="button mechanic-secondary" href="tel:+39031210622">
-                Chiama l&apos;officina
-              </a>
-            </div>
+            <a
+              className="button primary booking-offer-cta"
+              href="/prenotazione-cambio-gomme/?servizio=gomme-nuove#scegli-gomme"
+            >
+              Richiedi preventivo gomme nuove
+            </a>
+            <small className="booking-offer-note">
+              Sconto applicato agli pneumatici nuovi, esclusi montaggio e servizi. Offerta non
+              cumulabile, soggetta a disponibilita e conferma nel preventivo.
+            </small>
           </div>
         </div>
       </section>
@@ -278,9 +276,8 @@ export default function Home() {
           <div className="section-head">
             <h2>Lavorazioni curate, dalla diagnosi alla consegna</h2>
             <p>
-              Il lavoro viene presentato con chiarezza, eseguito con attenzione tecnica e
-              controllato nei dettagli finali: un approccio pensato per chi cerca una
-              carrozzeria affidabile nell&apos;area di Como.
+              Un metodo unico accompagna ogni servizio: valutazione, coordinamento tecnico e
+              controllo finale prima della riconsegna.
             </p>
           </div>
           <div className="work-grid">
@@ -338,6 +335,11 @@ export default function Home() {
       <footer>
         <span>Borsieri Car Service S.r.l. · P.IVA 03996560136</span>
         <span>Carrozzeria · Officina meccanica · Gommista · San Fermo della Battaglia</span>
+        <div className="footer-legal-links">
+          <a href="https://www.iubenda.com/privacy-policy/16946203" rel="noreferrer" target="_blank">Privacy policy</a>
+          <a href="https://www.iubenda.com/privacy-policy/16946203/cookie-policy" rel="noreferrer" target="_blank">Cookie policy</a>
+          <CookieSettingsLink />
+        </div>
       </footer>
     </main>
   );

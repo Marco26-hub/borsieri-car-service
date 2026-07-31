@@ -21,14 +21,12 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   );
   assert.match(html, /Carrozzeria specializzata Borsieri Car Service/);
   assert.match(html, /San Fermo della Battaglia/);
-  assert.match(html, /Ripristino carrozzeria con processo professionale/);
+  assert.match(html, /Dalla preparazione alla finitura/);
   assert.match(html, /Prenota cambio gomme/);
-  assert.match(html, /Nuovo servizio online/);
-  assert.match(html, /href="\/prenotazione-cambio-gomme"/);
-  assert.match(html, /Apri il calendario/);
-  assert.match(html, /servizio-carrozzeria\.webp/);
+  assert.match(html, /Sconto del 10%/);
+  assert.match(html, /servizio=gomme-nuove#scegli-gomme/);
+  assert.match(html, /Richiedi preventivo gomme nuove/);
   assert.match(html, /servizio-meccanica\.webp/);
-  assert.match(html, /servizio-pneumatici\.webp/);
   assert.match(html, /topbar-booking-cta/);
   assert.match(html, /Servizio dedicato ai clienti dalla Svizzera/);
   assert.match(html, /Auto sostitutiva anche per residenti in Svizzera/);
@@ -36,6 +34,7 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Assistenza meccanica/);
   assert.match(html, /id="meccanica"/);
   assert.match(html, /replacement-car-image/);
+  assert.match(html, /Analisi tecnica e priorita chiare/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);
@@ -57,21 +56,23 @@ test("renders the dedicated tire booking page and selectable service structure",
   assert.match(html, /Sola convergenza/);
   assert.match(html, /Gestione pneumatici/);
   assert.match(html, /Gomme nuove/);
+  assert.match(html, /-10% sulle gomme nuove/);
   assert.match(html, /Gomme in magazzino/);
   assert.match(html, /Gomme da portare/);
   assert.match(html, /Scegli data e orario/);
   assert.match(html, /Google Calendar/);
-  assert.match(html, /Calendario Google pronto al collegamento/);
+  assert.match(html, /Accesso agli slot/);
 });
 
 test("keeps Tophost and production handoff configuration in sync", async () => {
-  const [nextConfig, packageJson, handoff, checklist, page, bookingPage, configurator, quoteEndpoint, htaccess, envExample] =
+  const [nextConfig, packageJson, handoff, checklist, page, globalsCss, bookingPage, configurator, quoteEndpoint, htaccess, envExample] =
     await Promise.all([
       readFile(new URL("../next.config.ts", import.meta.url), "utf8"),
       readFile(new URL("../package.json", import.meta.url), "utf8"),
       readFile(new URL("../HANDOFF.md", import.meta.url), "utf8"),
       readFile(new URL("../GO_LIVE_CHECKLIST.md", import.meta.url), "utf8"),
       readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
       readFile(new URL("../app/prenotazione-cambio-gomme/page.tsx", import.meta.url), "utf8"),
       readFile(new URL("../app/prenotazione-cambio-gomme/BookingConfigurator.tsx", import.meta.url), "utf8"),
       readFile(new URL("../public/api/preventivo.php", import.meta.url), "utf8"),
@@ -90,15 +91,25 @@ test("keeps Tophost and production handoff configuration in sync", async () => {
   assert.match(checklist, /Gomme nuove/);
 
   assert.match(page, /\/prenotazione-cambio-gomme/);
+  assert.match(page, /servizio=gomme-nuove#scegli-gomme/);
+  assert.match(globalsCss, /servizio-pneumatici\.webp/);
+  assert.match(globalsCss, /hero-carrozzeria-cinematica\.webp/);
   assert.doesNotMatch(page, /id="prenota"/);
   assert.match(bookingPage, /id="prenota"/);
   assert.match(bookingPage, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
   assert.match(bookingPage, /buildGoogleAppointmentUrl/);
   assert.match(configurator, /name="intervention"/);
   assert.match(configurator, /name="tire-management"/);
+  assert.match(configurator, /id="scegli-gomme"/);
+  assert.match(configurator, /URLSearchParams/);
+  assert.match(configurator, /setTireManagement\("Gomme nuove"\)/);
+  assert.match(configurator, /name="targa"/);
+  assert.match(configurator, /name="numero_preventivo"/);
   assert.match(configurator, /Richiedi preventivo/);
+  assert.match(configurator, /Sconto 10% gomme nuove/);
   assert.match(configurator, /fetch\("\/api\/preventivo\.php"/);
   assert.match(quoteEndpoint, /borsiericar@gmail\.com/);
+  assert.match(quoteEndpoint, /Promozione:/);
   assert.match(quoteEndpoint, /mail\(\$recipient/);
   assert.match(htaccess, /RewriteCond %\{HTTPS\} !=on/);
   assert.doesNotMatch(page, /fetch\("\/api\/appointments"/);

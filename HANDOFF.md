@@ -37,12 +37,16 @@ Questa preview non e il dominio ufficiale del cliente. Il sito andra trasferito 
 - Sezioni per carrozzeria, meccanica, pneumatici e lavorazioni.
 - Nuovo servizio di prenotazione cambio gomme evidenziato.
 - Pagina dedicata `/prenotazione-cambio-gomme` con menu selezionabile dal cliente.
+- CTA preventivo gomme nuove collegata direttamente a `?servizio=gomme-nuove#scegli-gomme`, con opzione gia selezionata.
 - Configuratore gomme nuove e richiesta preventivo inviata dal sito tramite PHP Tophost.
+- CTA promozionale con sconto web del 10% sulle gomme nuove e dettaglio offerta nella richiesta email.
 - Sezione clienti dalla Svizzera con auto sostitutiva su richiesta.
 - Calendario Google Appointment Schedule integrato direttamente nel sito.
 - CTA collegate: valutazione in sede, prenotazione cambio gomme, lavorazioni, telefono, email e indicazioni Google Maps.
 - SEO/GEO tecnico: metadata, canonical, Open Graph, sitemap, robots e schema LocalBusiness/AutoBodyShop.
 - Embed inline della booking page Google Calendar per il cambio gomme.
+- Banner preferenze e caricamento di Google Calendar solo dopo consenso esplicito.
+- Immagini WebP locali con varianti mobile/desktop; nessun hotlink a CDN fotografiche esterne.
 - `.env.example` con variabili richieste.
 
 ## Comportamento del form prenotazioni
@@ -60,7 +64,11 @@ Prima del calendario il sito propone flag chiari:
 - `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
 - `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
 - `Gomme nuove`: tipo gomma estiva/invernale/4 stagioni, larghezza, spalla, diametro, indice carico/velocita e fascia preferita.
-- `Rubrica cliente`: telefono, auto, targa opzionale e note.
+- `Dati obbligatori`: nome e cognome, telefono, email, marca/modello auto, targa e consenso privacy.
+- `Numero preventivo`: facoltativo e utilizzabile anche per prenotare uno slot senza vincolo di accettazione.
+- `Gestione appuntamento`: nuova prenotazione, modifica o annullamento con riferimento dell'appuntamento esistente.
+
+La richiesta per gomme nuove produce soltanto un preventivo. Lo slot puo essere prenotato in un secondo momento, anche senza numero preventivo e senza accettazione automatica dell'offerta.
 
 Le richieste per gomme nuove vengono inviate a `borsiericar@gmail.com` tramite `public/api/preventivo.php`. Su Tophost va verificato che PHP `mail()` invii correttamente e che il mittente `noreply@borsiericarservice.it` sia accettato.
 
@@ -69,7 +77,7 @@ Le richieste per gomme nuove vengono inviate a `borsiericar@gmail.com` tramite `
 1. Accedere al pannello Tophost e alla gestione file/FTP del dominio.
 2. Creare in Google Calendar una booking page dedicata al cambio gomme.
 3. Configurare disponibilita, durata slot, buffer, limiti giornalieri e promemoria.
-4. Aggiungere alla booking page Google i soli campi necessari alla conferma dello slot.
+4. Aggiungere alla booking page Google i soli campi necessari alla conferma dello slot, evitando di duplicare i dati gia raccolti dal sito.
 5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
 6. Impostare `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL` in locale prima della build.
 7. Eseguire `npm run build` e caricare il contenuto di `out/` su Tophost.
@@ -88,8 +96,9 @@ Le richieste per gomme nuove vengono inviate a `borsiericar@gmail.com` tramite `
 - Giorni di chiusura, ferie e festivita.
 - Link Google Calendar Appointment Schedule definitivo.
 - Campi rubrica e flag definitivi nella booking page Google.
-- Privacy/cookie policy definitiva.
-- Foto reali di carrozzeria e officina per sostituire immagini stock.
+- Conferma del link Iubenda e dei testi privacy/cookie definitivi.
+- Eventuali foto reali del cliente da usare in futuro al posto delle immagini premium generate.
+- Validita e condizioni definitive della promozione web gomme nuove -10%.
 
 ## Comandi utili
 

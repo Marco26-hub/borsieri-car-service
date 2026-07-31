@@ -2,13 +2,19 @@
 
 ## Stato pronto
 
-- Landing production-ready in Next/Vinext.
+- Landing production-ready in Next.js con export statico per Tophost.
 - Logo ufficiale integrato.
 - Palette coerente con brand: nero, arancio, silver.
 - Copy SEO/GEO professionale con focus su carrozzeria specializzata.
 - Nuovo servizio di prenotazione cambio gomme evidenziato.
 - Google Calendar Appointment Schedule integrato onsite.
 - Pagina prenotazione dedicata con flag interattivi e richiesta preventivo gomme nuove.
+- CTA gomme nuove collegata alla scelta gia preselezionata nel configuratore.
+- Dati cliente e veicolo obbligatori per tutte le lavorazioni pneumatici.
+- Flussi per nuova prenotazione, modifica e annullamento.
+- Google Calendar bloccato fino all'invio dei dati e al consenso per contenuti esterni.
+- Immagini WebP locali responsive, senza hotlink Unsplash.
+- Promozione web del 10% sulle gomme nuove evidenziata nella CTA e registrata nelle richieste.
 - Build statica e invio email PHP predisposti per Tophost.
 - Booking page Google pronta per mostrare slot liberi, form cliente e conferme.
 - Metadata SEO, canonical, Open Graph, sitemap e robots pronti per `borsiericarservice.it`.
@@ -23,7 +29,8 @@
    - `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
    - `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
    - `Gomme nuove`: tipo gomma estiva/invernale/4 stagioni, larghezza, spalla, diametro, indice carico/velocita e fascia preferita.
-   - `Rubrica cliente`: telefono, auto, targa opzionale e note.
+   - `Dati cliente e auto`: nome, telefono, email, marca/modello e targa obbligatori.
+   - `Numero preventivo`: facoltativo, senza vincolo tra preventivo e prenotazione.
 5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
 6. Impostare localmente `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL` prima della build.
 7. Verificare che la prenotazione compaia nel calendario Google del cliente.
@@ -48,8 +55,9 @@
 - Link Google Calendar Appointment Schedule.
 - Campi rubrica e flag Google definitivi.
 - Email o flusso interno per notificare le nuove richieste.
-- Policy privacy definitiva e link Iubenda aggiornato.
-- Foto reali di carrozzeria/officina da sostituire alle immagini stock.
+- Policy privacy/cookie definitiva e link Iubenda confermato.
+- Eventuali foto reali del cliente da sostituire in futuro alle immagini premium generate.
+- Validita temporale e condizioni commerciali definitive della promozione gomme nuove -10%.
 
 ## Attenzione
 

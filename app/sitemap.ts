@@ -7,13 +7,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: baseUrl,
+      url: `${baseUrl}/`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/prenotazione-cambio-gomme`,
+      url: `${baseUrl}/prenotazione-cambio-gomme/`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.9,

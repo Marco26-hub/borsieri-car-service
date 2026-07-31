@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CookieConsent from "./CookieConsent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,10 +18,25 @@ export const metadata: Metadata = {
     siteName: "Borsieri Car Service",
     type: "website",
     url: "/",
+    images: [
+      {
+        url: "/og-borsieri.webp",
+        width: 1200,
+        height: 630,
+        alt: "Borsieri Car Service - carrozzeria specializzata vicino a Como",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Carrozzeria Borsieri Car Service",
+    description: "Carrozzeria, officina meccanica e servizio pneumatici vicino a Como.",
+    images: ["/og-borsieri.webp"],
   },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 
@@ -31,7 +47,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }

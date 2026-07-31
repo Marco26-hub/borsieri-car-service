@@ -29,6 +29,8 @@ if ($lastRequest > 0 && time() - $lastRequest < 45) {
 }
 
 $fields = [
+    'azione_prenotazione' => 40,
+    'riferimento_prenotazione' => 120,
     'intervento' => 80,
     'gestione_pneumatici' => 80,
     'tipologia' => 40,
@@ -36,11 +38,13 @@ $fields = [
     'indice_carico' => 30,
     'codice_velocita' => 30,
     'fascia' => 40,
+    'promozione' => 100,
     'nome' => 120,
     'telefono' => 40,
     'email' => 160,
     'veicolo' => 120,
     'targa' => 20,
+    'numero_preventivo' => 40,
     'consenso' => 2,
 ];
 
@@ -51,6 +55,7 @@ foreach ($fields as $field => $maxLength) {
 }
 
 $required = [
+    'azione_prenotazione',
     'intervento',
     'gestione_pneumatici',
     'tipologia',
@@ -60,6 +65,7 @@ $required = [
     'telefono',
     'email',
     'veicolo',
+    'targa',
     'consenso',
 ];
 
@@ -67,6 +73,11 @@ foreach ($required as $field) {
     if ($data[$field] === '') {
         respond(422, false, 'Compila tutti i campi obbligatori.');
     }
+}
+
+if ($data['azione_prenotazione'] !== 'Nuova prenotazione'
+    && ($data['riferimento_prenotazione'] === '' || $data['riferimento_prenotazione'] === 'Non applicabile')) {
+    respond(422, false, 'Indica il riferimento della prenotazione esistente.');
 }
 
 if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -80,10 +91,19 @@ if ($data['consenso'] !== 'si') {
 $safeEmail = str_replace(["\r", "\n"], '', $data['email']);
 $safeName = str_replace(["\r", "\n"], ' ', $data['nome']);
 $recipient = 'borsiericar@gmail.com';
-$subject = 'Richiesta preventivo pneumatici - ' . $safeName;
+$subjectPrefix = $data['azione_prenotazione'] === 'Annulla prenotazione'
+    ? 'Annullamento prenotazione pneumatici'
+    : ($data['azione_prenotazione'] === 'Cambia prenotazione'
+        ? 'Modifica prenotazione pneumatici'
+        : ($data['gestione_pneumatici'] === 'Gomme nuove'
+            ? 'Richiesta preventivo pneumatici'
+            : 'Richiesta servizio pneumatici'));
+$subject = $subjectPrefix . ' - ' . $safeName;
 $message = implode("\n", [
-    'Nuova richiesta preventivo dal sito Borsieri Car Service',
+    'Nuova richiesta dal sito Borsieri Car Service',
     '',
+    'Azione: ' . $data['azione_prenotazione'],
+    'Riferimento prenotazione: ' . ($data['riferimento_prenotazione'] ?: 'Non applicabile'),
     'Intervento: ' . $data['intervento'],
     'Gestione pneumatici: ' . $data['gestione_pneumatici'],
     'Tipologia: ' . $data['tipologia'],
@@ -91,12 +111,14 @@ $message = implode("\n", [
     'Indice di carico: ' . ($data['indice_carico'] ?: 'Da verificare'),
     'Codice velocita: ' . ($data['codice_velocita'] ?: 'Da verificare'),
     'Fascia: ' . $data['fascia'],
+    'Promozione: ' . ($data['promozione'] ?: 'Sconto 10% gomme nuove - richiesta online'),
     '',
     'Cliente: ' . $data['nome'],
     'Telefono: ' . $data['telefono'],
     'Email: ' . $data['email'],
     'Veicolo: ' . $data['veicolo'],
-    'Targa: ' . ($data['targa'] ?: 'Non indicata'),
+    'Targa: ' . $data['targa'],
+    'Numero preventivo: ' . ($data['numero_preventivo'] ?: 'Non indicato'),
     'Consenso al ricontatto: si',
 ]);
 $headers = implode("\r\n", [

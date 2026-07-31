@@ -1,27 +1,37 @@
+/* eslint-disable @next/next/no-img-element -- Static Tophost export serves the lightweight local logo directly. */
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CookieSettingsLink } from "../CookieConsent";
 import BookingConfigurator from "./BookingConfigurator";
 
 export const metadata: Metadata = {
   title: "Prenotazione cambio gomme | Borsieri Car Service",
   description:
-    "Prenota online cambio gomme, riparazione pneumatici e convergenza da Borsieri Car Service a San Fermo della Battaglia, vicino a Como.",
+    "Prenota il cambio gomme o richiedi online un preventivo con il 10% di sconto sulle gomme nuove da Borsieri Car Service, vicino a Como.",
   alternates: {
     canonical: "/prenotazione-cambio-gomme",
   },
   openGraph: {
     title: "Prenota il cambio gomme | Borsieri Car Service",
     description:
-      "Consulta gli slot disponibili e prenota il servizio pneumatici a San Fermo della Battaglia.",
+      "Consulta gli slot e richiedi un preventivo online con il 10% di sconto sulle gomme nuove.",
     url: "/prenotazione-cambio-gomme",
+    images: [
+      {
+        url: "/og-borsieri.webp",
+        width: 1200,
+        height: 630,
+        alt: "Borsieri Car Service - prenotazione servizio pneumatici",
+      },
+    ],
   },
 };
 
 const appointmentFlowItems = [
-  { label: "01", title: "Servizio", text: "Indica la lavorazione e come verranno gestiti gli pneumatici." },
-  { label: "02", title: "Slot", text: "Scegli una data e un orario tra quelli disponibili." },
-  { label: "03", title: "Dati", text: "Completa i riferimenti del cliente e del veicolo." },
-  { label: "04", title: "Conferma", text: "Ricevi la conferma dell'appuntamento dal calendario Google." },
+  { label: "01", title: "Operazione", text: "Scegli nuova prenotazione, modifica o annullamento e indica il servizio." },
+  { label: "02", title: "Dati obbligatori", text: "Inserisci riferimenti del cliente, auto e targa." },
+  { label: "03", title: "Invio", text: "Trasmetti i dati o la richiesta di preventivo all'officina." },
+  { label: "04", title: "Agenda", text: "Per prenotazioni e modifiche, scegli uno slot libero nel calendario Google." },
 ];
 
 function buildGoogleAppointmentUrl(value?: string) {
@@ -62,7 +72,7 @@ export default function TireBookingPage() {
 
       <section className="booking-page-hero">
         <div className="booking-page-hero-inner">
-          <div className="eyebrow">Servizio pneumatici online</div>
+          <div className="eyebrow">Servizio pneumatici online · Offerta web</div>
           <h1>Prenota il cambio gomme</h1>
           <p>
             Consulta la disponibilita dell&apos;officina Borsieri Car Service a San Fermo della
@@ -73,63 +83,25 @@ export default function TireBookingPage() {
             <span>Lunedi-venerdi</span>
             <span>Conferma Google Calendar</span>
           </div>
-          <a className="button primary" href="#prenota">
-            Consulta gli slot liberi
-          </a>
+          <div className="booking-page-hero-actions">
+            <a className="button primary" href="#configuratore">
+              Preventivo gomme nuove -10%
+            </a>
+            <a className="button secondary" href="#calendario">
+              Consulta gli slot liberi
+            </a>
+          </div>
+          <p className="booking-hero-offer-note">
+            Promozione riservata alle richieste inviate dal sito: sconto del 10% sugli
+            pneumatici nuovi, esclusi montaggio e servizi. Non cumulabile e soggetta a
+            disponibilita; condizioni confermate nel preventivo.
+          </p>
         </div>
       </section>
 
       <section className="booking-workspace" id="prenota">
         <div className="section-inner">
-          <BookingConfigurator />
-
-          <div className="booking-workspace-head">
-            <div>
-              <span className="booking-card-label">Passaggio 2 · Agenda online Borsieri</span>
-              <h2>Scegli data e orario</h2>
-            </div>
-            <p>
-              Gli slot mostrati rispettano gli orari impostati dall&apos;officina. Tutta la
-              prenotazione viene completata nel calendario incorporato qui sotto.
-            </p>
-          </div>
-
-          <div className="booking-card booking-calendar-card" id="calendario">
-            <div className="booking-card-head">
-              <div>
-                <span className="booking-card-label">Google Calendar</span>
-                <strong>Prenotazioni cambio gomme</strong>
-              </div>
-              <span className="booking-card-badge">Online</span>
-            </div>
-
-            <div className="booking-workspace-grid booking-workspace-calendar-only">
-              <div className="google-booking-frame-shell">
-                {googleAppointmentUrl ? (
-                  <iframe
-                    className="google-booking-frame"
-                    loading="eager"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    src={googleAppointmentUrl}
-                    title="Prenotazione cambio gomme Borsieri Car Service"
-                  />
-                ) : (
-                  <div className="google-booking-placeholder">
-                    <span className="booking-card-label">Configurazione finale</span>
-                    <strong>Calendario Google pronto al collegamento</strong>
-                    <p>
-                      Collegando il link della pagina appuntamenti Google compariranno
-                      qui gli slot liberi, i campi cliente e la conferma.
-                    </p>
-                    <a className="button primary" href="tel:+39031210622">
-                      Prenota telefonicamente
-                    </a>
-                  </div>
-                )}
-              </div>
-
-            </div>
-          </div>
+          <BookingConfigurator googleAppointmentUrl={googleAppointmentUrl} />
         </div>
       </section>
 
@@ -170,6 +142,11 @@ export default function TireBookingPage() {
       <footer>
         <span>Borsieri Car Service S.r.l. · P.IVA 03996560136</span>
         <span>Carrozzeria · Officina meccanica · Gommista · San Fermo della Battaglia</span>
+        <div className="footer-legal-links">
+          <a href="https://www.iubenda.com/privacy-policy/16946203" rel="noreferrer" target="_blank">Privacy policy</a>
+          <a href="https://www.iubenda.com/privacy-policy/16946203/cookie-policy" rel="noreferrer" target="_blank">Cookie policy</a>
+          <CookieSettingsLink />
+        </div>
       </footer>
     </main>
   );
