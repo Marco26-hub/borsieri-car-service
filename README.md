@@ -44,7 +44,13 @@ Il cliente deve creare in Google Calendar una booking page per il cambio gomme e
 Booking pages > Sharing options > Website embed > Inline booking page
 ```
 
-Usare il link `https://calendar.google.com/calendar/appointments/schedules/...` come valore di `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`. Nel form Google vanno aggiunti campi chiari per telefono, auto, misura pneumatici e note.
+Usare il link `https://calendar.google.com/calendar/appointments/schedules/...` come valore di `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
+
+Nel Booking form Google vanno aggiunti questi campi obbligatori:
+
+- `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
+- `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
+- `Rubrica cliente`: telefono, auto, misura pneumatici e note.
 
 ## Go-live
 

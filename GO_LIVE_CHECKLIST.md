@@ -16,14 +16,18 @@
 
 1. Creare progetto Netlify collegato al repository GitHub.
 2. Creare in Google Calendar una booking page dedicata al cambio gomme.
-3. Configurare orari, durata slot, buffer, limiti giornalieri, promemoria e campi rubrica.
-4. Copiare il link da `Sharing options > Website embed > Inline booking page`.
-5. Impostare su Netlify la variabile `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
-6. Verificare che la prenotazione compaia nel calendario Google del cliente.
-7. Collegare il dominio `borsiericarservice.it` e `www.borsiericarservice.it` su Netlify.
-8. Aggiornare DNS del dominio come indicato da Netlify.
-9. Verificare redirect canonico verso `https://www.borsiericarservice.it`.
-10. Fare test finale da mobile:
+3. Configurare orari, durata slot, buffer, limiti giornalieri e promemoria.
+4. Aggiungere nel Booking form Google i flag:
+   - `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
+   - `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
+   - `Rubrica cliente`: telefono, auto, misura pneumatici e note.
+5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
+6. Impostare su Netlify la variabile `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
+7. Verificare che la prenotazione compaia nel calendario Google del cliente.
+8. Collegare il dominio `borsiericarservice.it` e `www.borsiericarservice.it` su Netlify.
+9. Aggiornare DNS del dominio come indicato da Netlify.
+10. Verificare redirect canonico verso `https://www.borsiericarservice.it`.
+11. Fare test finale da mobile:
     - navigazione;
     - chiamata telefonica;
     - email;
@@ -37,7 +41,7 @@
 - Numero massimo auto gestibili per fascia.
 - Giorni di chiusura o ferie.
 - Link Google Calendar Appointment Schedule.
-- Campi rubrica Google: telefono, auto, misura pneumatici, deposito gomme e note.
+- Campi rubrica e flag Google definitivi.
 - Email o flusso interno per notificare le nuove richieste.
 - Policy privacy definitiva e link Iubenda aggiornato.
 - Foto reali di carrozzeria/officina da sostituire alle immagini stock.

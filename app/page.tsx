@@ -74,11 +74,19 @@ const localBusinessSchema = {
   ],
 };
 
-const bookingDirectoryItems = [
-  "Nome, cognome ed email per la conferma",
-  "Telefono per eventuale ricontatto rapido",
-  "Marca, modello e misura pneumatici",
-  "Note su deposito gomme, urgenze o richieste particolari",
+const bookingDirectoryGroups = [
+  {
+    title: "Tipo intervento",
+    items: ["Cambio gomme", "Riparazione gomma", "Sola convergenza"],
+  },
+  {
+    title: "Gestione pneumatici",
+    items: ["Gomme sue", "Gomme nuove", "Gomme in magazzino", "Gomme da portare"],
+  },
+  {
+    title: "Rubrica cliente",
+    items: ["Telefono", "Auto", "Misura pneumatici", "Note"],
+  },
 ];
 
 function buildGoogleAppointmentUrl(value?: string) {
@@ -208,12 +216,19 @@ export default function Home() {
 
                 <div className="booking-directory">
                   <span className="booking-field-title">Rubrica chiara</span>
-                  <h3>Dati da raccogliere</h3>
-                  <ul>
-                    {bookingDirectoryItems.map((item) => (
-                      <li key={item}>{item}</li>
+                  <h3>Menu e flag da impostare</h3>
+                  <div className="booking-directory-groups">
+                    {bookingDirectoryGroups.map((group) => (
+                      <div className="booking-directory-group" key={group.title}>
+                        <strong>{group.title}</strong>
+                        <ul>
+                          {group.items.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             </div>

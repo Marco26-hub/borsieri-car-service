@@ -52,14 +52,18 @@ NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL
 
 Se la variabile non e configurata, il sito mostra una card professionale di collegamento calendario e una CTA telefonica.
 
-Nel modulo Google e consigliato aggiungere campi di rubrica chiari: telefono, auto, misura pneumatici, deposito gomme e note.
+Nel modulo Google vanno aggiunti flag chiari:
+
+- `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
+- `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
+- `Rubrica cliente`: telefono, auto, misura pneumatici e note.
 
 ## Cosa resta da fare quando arrivano le credenziali
 
 1. Collegare il repository GitHub a Netlify.
 2. Creare in Google Calendar una booking page dedicata al cambio gomme.
 3. Configurare disponibilita, durata slot, buffer, limiti giornalieri e promemoria.
-4. Aggiungere alla booking page campi rubrica: telefono, auto, misura pneumatici, deposito e note.
+4. Aggiungere alla booking page i flag `Tipo intervento`, `Gestione pneumatici` e i campi rubrica cliente.
 5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
 6. Inserire in Netlify `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
 7. Fare deploy Netlify.
@@ -76,7 +80,7 @@ Nel modulo Google e consigliato aggiungere campi di rubrica chiari: telefono, au
 - Numero massimo di auto gestibili per fascia.
 - Giorni di chiusura, ferie e festivita.
 - Link Google Calendar Appointment Schedule definitivo.
-- Campi rubrica definitivi nella booking page Google.
+- Campi rubrica e flag definitivi nella booking page Google.
 - Privacy/cookie policy definitiva.
 - Foto reali di carrozzeria e officina per sostituire immagini stock.
 

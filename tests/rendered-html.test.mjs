@@ -41,6 +41,10 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Nuovo servizio online/);
   assert.match(html, /Google Calendar/);
   assert.match(html, /Rubrica chiara/);
+  assert.match(html, /Riparazione gomma/);
+  assert.match(html, /Sola convergenza/);
+  assert.match(html, /Gomme in magazzino/);
+  assert.match(html, /Gomme da portare/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);
@@ -67,6 +71,8 @@ test("keeps Netlify and production handoff configuration in sync", async () => {
   assert.match(handoff, /Collegare il repository GitHub a Netlify/);
   assert.match(checklist, /Creare progetto Netlify collegato al repository GitHub/);
   assert.match(checklist, /Google Calendar Appointment Schedule/);
+  assert.match(checklist, /Tipo intervento/);
+  assert.match(checklist, /Gestione pneumatici/);
 
   assert.match(page, /id="prenota"/);
   assert.match(page, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
