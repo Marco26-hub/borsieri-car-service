@@ -343,131 +343,74 @@ h1 {
   text-transform: uppercase;
 }
 
-.booking-card-grid,
-.booking-date-column,
-.booking-request-column,
-.booking-group {
+.google-booking-layout {
   display: grid;
   gap: 12px;
 }
 
-.booking-days,
-.booking-slots {
-  display: grid;
-  gap: 7px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.google-booking-frame-shell {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  min-height: 620px;
+  overflow: hidden;
 }
 
-.day-button,
-.time-button {
-  appearance: none;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  color: var(--ink);
-  cursor: pointer;
-  font: inherit;
-  min-height: 46px;
-  padding: 9px;
-}
-
-.day-button {
-  text-align: left;
-}
-
-.day-button strong,
-.day-button span {
+.google-booking-frame {
+  background: #fff;
+  border: 0;
   display: block;
-}
-
-.day-button strong {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-}
-
-.day-button span {
-  color: var(--muted);
-  font-size: 0.7rem;
-  margin-top: 4px;
-}
-
-.day-button.active,
-.time-button.active {
-  background: rgba(255, 153, 0, 0.18);
-  border-color: rgba(255, 153, 0, 0.72);
-}
-
-.time-button {
-  font-weight: 800;
-  min-height: 38px;
-  padding-inline: 6px;
-  text-align: center;
-}
-
-.time-button[disabled] {
-  color: rgba(248, 250, 252, 0.38);
-  cursor: not-allowed;
-  opacity: 0.55;
-  text-decoration: line-through;
-}
-
-.booking-form {
-  display: grid;
-  gap: 8px;
-}
-
-.booking-form label {
-  color: var(--muted);
-  display: grid;
-  font-size: 0.76rem;
-  font-weight: 800;
-  gap: 5px;
-}
-
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 40px;
-  padding: 9px 10px;
+  height: 620px;
   width: 100%;
 }
 
-.booking-form textarea {
-  min-height: 58px;
-  resize: vertical;
+.google-booking-placeholder {
+  align-content: center;
+  display: grid;
+  gap: 14px;
+  min-height: 620px;
+  padding: 24px;
+  text-align: left;
 }
 
-.booking-form .button {
-  min-height: 42px;
+.google-booking-placeholder strong {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.2;
 }
 
-.booking-form select option {
-  color: #101720;
+.google-booking-placeholder p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
 }
 
-.booking-summary {
-  background: rgba(255, 153, 0, 0.12);
-  border: 1px solid rgba(255, 153, 0, 0.34);
-  border-radius: 6px;
-  color: #fff1d8;
-  font-size: 0.8rem;
+.booking-directory {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.booking-directory h3 {
+  font-size: 1rem;
+  line-height: 1.15;
+  margin: 6px 0 12px;
+}
+
+.booking-directory ul {
+  color: var(--muted);
+  display: grid;
+  gap: 8px;
   line-height: 1.42;
-  padding: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.booking-confirmation {
-  background: rgba(14, 165, 98, 0.14);
-  border: 1px solid rgba(14, 165, 98, 0.38);
-  border-radius: 6px;
-  color: #d9ffe9;
-  font-size: 0.82rem;
-  line-height: 1.45;
-  padding: 10px;
+.booking-directory li {
+  border-left: 2px solid rgba(255, 153, 0, 0.62);
+  padding-left: 10px;
 }
 
 section {
@@ -872,11 +815,6 @@ footer {
   .hero-inner {
     max-width: 1280px;
     grid-template-columns: minmax(0, 0.82fr) minmax(560px, 0.72fr);
-  }
-
-  .booking-card-grid {
-    align-items: start;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1fr);
   }
 
   .booking-panel-header {

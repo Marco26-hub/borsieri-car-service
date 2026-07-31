@@ -1,7 +1,3 @@
-"use client";
-
-import { FormEvent, useMemo, useState } from "react";
-
 const services = [
   {
     title: "Carrozzeria specializzata",
@@ -51,15 +47,6 @@ const workCards = [
   },
 ];
 
-const bookingServices = [
-  "Cambio gomme stagionale",
-  "Montaggio pneumatici nuovi",
-  "Equilibratura",
-  "Convergenza",
-  "Deposito gomme",
-  "Riparazione foratura",
-];
-
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "AutoBodyShop",
@@ -87,130 +74,30 @@ const localBusinessSchema = {
   ],
 };
 
-const closedSlotKeys = new Set([
-  "2026-07-30T08:45",
-  "2026-07-30T10:15",
-  "2026-07-30T14:45",
-  "2026-07-31T09:30",
-  "2026-07-31T15:30",
-  "2026-08-03T08:00",
-  "2026-08-03T11:00",
-  "2026-08-04T16:15",
-]);
+const bookingDirectoryItems = [
+  "Nome, cognome ed email per la conferma",
+  "Telefono per eventuale ricontatto rapido",
+  "Marca, modello e misura pneumatici",
+  "Note su deposito gomme, urgenze o richieste particolari",
+];
 
-const weekdayFormatter = new Intl.DateTimeFormat("it-IT", { weekday: "short" });
-const dateFormatter = new Intl.DateTimeFormat("it-IT", {
-  day: "2-digit",
-  month: "short",
-});
-const longDateFormatter = new Intl.DateTimeFormat("it-IT", {
-  weekday: "long",
-  day: "2-digit",
-  month: "long",
-});
+function buildGoogleAppointmentUrl(value?: string) {
+  if (!value) return "";
 
-function toDateKey(date: Date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
-
-function buildBusinessDays(count: number) {
-  const days: Date[] = [];
-  const current = new Date();
-  current.setHours(0, 0, 0, 0);
-
-  while (days.length < count) {
-    const day = current.getDay();
-    if (day >= 1 && day <= 5) {
-      days.push(new Date(current));
+  try {
+    const url = new URL(value);
+    if (!url.hostname.endsWith("calendar.google.com")) return "";
+    if (!url.searchParams.has("gv")) {
+      url.searchParams.set("gv", "true");
     }
-    current.setDate(current.getDate() + 1);
+    return url.toString();
+  } catch {
+    return "";
   }
-
-  return days;
-}
-
-function buildSlotsForDate(date: Date) {
-  const ranges = [
-    { start: 8 * 60, end: 12 * 60 },
-    { start: 14 * 60, end: 18 * 60 + 30 },
-  ];
-  const duration = 45;
-  const dateKey = toDateKey(date);
-
-  return ranges.flatMap((range) => {
-    const slots = [];
-    for (let minutes = range.start; minutes + duration <= range.end; minutes += duration) {
-      const hours = String(Math.floor(minutes / 60)).padStart(2, "0");
-      const mins = String(minutes % 60).padStart(2, "0");
-      const time = `${hours}:${mins}`;
-      slots.push({
-        time,
-        available: !closedSlotKeys.has(`${dateKey}T${time}`),
-      });
-    }
-    return slots;
-  });
 }
 
 export default function Home() {
-  const days = useMemo(() => buildBusinessDays(9), []);
-  const [selectedDate, setSelectedDate] = useState(() => toDateKey(days[0]));
-  const [selectedTime, setSelectedTime] = useState("");
-  const [confirmation, setConfirmation] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const selectedDay = days.find((day) => toDateKey(day) === selectedDate) ?? days[0];
-  const slots = buildSlotsForDate(selectedDay);
-  const readableDate = longDateFormatter.format(selectedDay);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!selectedTime) {
-      setConfirmation("Seleziona prima uno slot libero.");
-      return;
-    }
-
-    const formData = new FormData(event.currentTarget);
-    const name = String(formData.get("name") ?? "").trim();
-    const service = String(formData.get("service") ?? "");
-    const form = event.currentTarget;
-    setIsSubmitting(true);
-
-    try {
-      const response = await fetch("/api/appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          service,
-          date: selectedDate,
-          time: selectedTime,
-          name,
-          phone: formData.get("phone"),
-          car: formData.get("car"),
-          notes: formData.get("notes"),
-        }),
-      });
-      const result = (await response.json()) as { error?: string };
-
-      if (!response.ok) {
-        setConfirmation(result.error ?? "Richiesta non inviata. Contatta l'officina telefonicamente.");
-        return;
-      }
-
-      setConfirmation(
-        `${name}, richiesta ricevuta per ${service}: ${readableDate} alle ${selectedTime}. L'officina confermera disponibilita e dettagli dell'appuntamento.`,
-      );
-      form.reset();
-    } catch {
-      setConfirmation("Connessione non disponibile. Contatta Borsieri Car Service telefonicamente.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
+  const googleAppointmentUrl = buildGoogleAppointmentUrl(process.env.NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL);
 
   return (
     <main id="top">
@@ -280,8 +167,8 @@ export default function Home() {
                 <div className="booking-kicker">Nuovo servizio online</div>
                 <h2>Prenota pneumatici e cambio gomme</h2>
                 <p>
-                  Scegli una fascia libera negli orari di apertura. Borsieri verifica la richiesta
-                  e conferma l&apos;appuntamento.
+                  Scegli una fascia libera dal calendario Google dell&apos;officina e completa i dati
+                  richiesti per la conferma.
                 </p>
               </div>
             </div>
@@ -289,102 +176,44 @@ export default function Home() {
             <div className="booking-card">
               <div className="booking-card-head">
                 <div>
-                  <span className="booking-card-label">Calendario integrato</span>
-                  <strong>Slot liberi per cambio gomme</strong>
+                  <span className="booking-card-label">Google Calendar</span>
+                  <strong>Pagina prenotazioni cambio gomme</strong>
                 </div>
-                <span className="booking-card-badge">Lun-Ven</span>
+                <span className="booking-card-badge">Online</span>
               </div>
 
-              <div className="booking-card-grid">
-                <div className="booking-date-column">
-                  <div className="booking-group">
-                    <span className="booking-field-title">Scegli giorno</span>
-                    <div className="booking-days" aria-label="Giorni disponibili">
-                      {days.map((day) => {
-                        const dateKey = toDateKey(day);
-                        return (
-                          <button
-                            className={`day-button${dateKey === selectedDate ? " active" : ""}`}
-                            key={dateKey}
-                            onClick={() => {
-                              setSelectedDate(dateKey);
-                              setSelectedTime("");
-                              setConfirmation("");
-                            }}
-                            type="button"
-                          >
-                            <strong>{weekdayFormatter.format(day)}</strong>
-                            <span>{dateFormatter.format(day)}</span>
-                          </button>
-                        );
-                      })}
+              <div className="google-booking-layout">
+                <div className="google-booking-frame-shell">
+                  {googleAppointmentUrl ? (
+                    <iframe
+                      className="google-booking-frame"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      src={googleAppointmentUrl}
+                      title="Prenotazione cambio gomme Borsieri Car Service"
+                    />
+                  ) : (
+                    <div className="google-booking-placeholder">
+                      <strong>Calendario Google pronto al collegamento</strong>
+                      <p>
+                        Quando viene inserito il link della booking page Google, qui compariranno
+                        slot liberi, modulo cliente e conferma appuntamento.
+                      </p>
+                      <a className="button secondary" href="tel:+39031210622">
+                        Prenota telefonicamente
+                      </a>
                     </div>
-                  </div>
-
-                  <div className="booking-group">
-                    <span className="booking-field-title">Scegli orario</span>
-                    <div className="booking-slots" aria-label="Orari disponibili">
-                      {slots.map((slot) => (
-                        <button
-                          aria-label={slot.available ? `Slot libero ${slot.time}` : `Slot occupato ${slot.time}`}
-                          className={`time-button${slot.time === selectedTime ? " active" : ""}`}
-                          disabled={!slot.available}
-                          key={slot.time}
-                          onClick={() => {
-                            setSelectedTime(slot.time);
-                            setConfirmation("");
-                          }}
-                          type="button"
-                        >
-                          {slot.time}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  )}
                 </div>
 
-                <div className="booking-request-column">
-                  <div className="booking-summary">
-                    {selectedTime
-                      ? `Hai scelto ${readableDate} alle ${selectedTime}. Completa i dati per inviare la richiesta.`
-                      : `Giorno selezionato: ${readableDate}. Ora scegli uno slot libero.`}
-                  </div>
-                  <form className="booking-form" onSubmit={handleSubmit}>
-                    <label>
-                      Lavorazione
-                      <select name="service" required>
-                        {bookingServices.map((service) => (
-                          <option key={service} value={service}>
-                            {service}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    <label>
-                      Nome e cognome
-                      <input name="name" autoComplete="name" required />
-                    </label>
-                    <label>
-                      Telefono
-                      <input name="phone" autoComplete="tel" inputMode="tel" required />
-                    </label>
-                    <label>
-                      Auto
-                      <input name="car" placeholder="Marca, modello, targa opzionale" required />
-                    </label>
-                    <label>
-                      Note
-                      <textarea name="notes" placeholder="Misura gomme, deposito, urgenze" />
-                    </label>
-                    <button className="button primary" disabled={isSubmitting} type="submit">
-                      {isSubmitting ? "Invio in corso" : "Invia richiesta"}
-                    </button>
-                  </form>
-                  {confirmation ? (
-                    <div className="booking-confirmation visible" role="status">
-                      {confirmation}
-                    </div>
-                  ) : null}
+                <div className="booking-directory">
+                  <span className="booking-field-title">Rubrica chiara</span>
+                  <h3>Dati da raccogliere</h3>
+                  <ul>
+                    {bookingDirectoryItems.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>

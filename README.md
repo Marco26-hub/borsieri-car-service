@@ -6,8 +6,8 @@ Sito production-ready per Borsieri Car Service S.r.l., carrozzeria specializzata
 
 - Next.js/Vinext
 - TypeScript
-- Supabase REST API per richieste prenotazione
-- Hosting previsto: Vercel sul dominio ufficiale `borsiericarservice.it`
+- Google Calendar Appointment Schedule inline per prenotazione cambio gomme
+- Hosting previsto: Netlify sul dominio ufficiale `borsiericarservice.it`
 
 ## Setup locale
 
@@ -32,26 +32,19 @@ npm run build:sites
 
 Copia `.env.example` in `.env.local` e imposta:
 
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
+- `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`
 
 Non committare file `.env*` reali.
 
-## Supabase
+## Google Calendar
 
-Eseguire lo script:
-
-```text
-supabase/001_appointments.sql
-```
-
-Il form prenotazione invia le richieste a:
+Il cliente deve creare in Google Calendar una booking page per il cambio gomme e copiare il link da:
 
 ```text
-/api/appointments
+Booking pages > Sharing options > Website embed > Inline booking page
 ```
 
-Se Supabase non e configurato, l'endpoint risponde con errore esplicito e non simula prenotazioni riuscite.
+Usare il link `https://calendar.google.com/calendar/appointments/schedules/...` come valore di `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`. Nel form Google vanno aggiunti campi chiari per telefono, auto, misura pneumatici e note.
 
 ## Go-live
 

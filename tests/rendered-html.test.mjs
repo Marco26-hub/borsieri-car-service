@@ -39,6 +39,8 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Ripristino carrozzeria con processo professionale/);
   assert.match(html, /Prenota pneumatici e cambio gomme/);
   assert.match(html, /Nuovo servizio online/);
+  assert.match(html, /Google Calendar/);
+  assert.match(html, /Rubrica chiara/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);
@@ -48,14 +50,14 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
 });
 
 test("keeps Netlify and production handoff configuration in sync", async () => {
-  const [netlifyConfig, packageJson, handoff, checklist, page, route] =
+  const [netlifyConfig, packageJson, handoff, checklist, page, envExample] =
     await Promise.all([
       readFile(new URL("../netlify.toml", import.meta.url), "utf8"),
       readFile(new URL("../package.json", import.meta.url), "utf8"),
       readFile(new URL("../HANDOFF.md", import.meta.url), "utf8"),
       readFile(new URL("../GO_LIVE_CHECKLIST.md", import.meta.url), "utf8"),
       readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
-      readFile(new URL("../app/api/appointments/route.ts", import.meta.url), "utf8"),
+      readFile(new URL("../.env.example", import.meta.url), "utf8"),
     ]);
 
   assert.match(netlifyConfig, /command = "npm run build"/);
@@ -64,9 +66,11 @@ test("keeps Netlify and production handoff configuration in sync", async () => {
   assert.match(packageJson, /"build:sites": "WRANGLER_LOG_PATH=\.wrangler\/wrangler\.log vinext build"/);
   assert.match(handoff, /Collegare il repository GitHub a Netlify/);
   assert.match(checklist, /Creare progetto Netlify collegato al repository GitHub/);
+  assert.match(checklist, /Google Calendar Appointment Schedule/);
 
   assert.match(page, /id="prenota"/);
-  assert.match(page, /fetch\("\/api\/appointments"/);
-  assert.match(route, /SUPABASE_URL/);
-  assert.match(route, /SUPABASE_SERVICE_ROLE_KEY/);
+  assert.match(page, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
+  assert.match(page, /buildGoogleAppointmentUrl/);
+  assert.doesNotMatch(page, /fetch\("\/api\/appointments"/);
+  assert.match(envExample, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
 });

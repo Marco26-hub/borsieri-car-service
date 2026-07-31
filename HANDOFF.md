@@ -26,7 +26,7 @@ Ultima preview produzione privata:
 https://borsieri-car-service.beige-fawn-1352.chatgpt.site
 ```
 
-Questa preview non e il dominio ufficiale del cliente. Il sito andra pubblicato sul dominio ufficiale quando saranno disponibili credenziali Vercel/DNS.
+Questa preview non e il dominio ufficiale del cliente. Il sito andra pubblicato sul dominio ufficiale quando saranno disponibili credenziali Netlify/DNS.
 
 ## Cosa e gia pronto
 
@@ -36,41 +36,38 @@ Questa preview non e il dominio ufficiale del cliente. Il sito andra pubblicato 
 - Posizionamento professionale su carrozzeria specializzata.
 - Sezioni per carrozzeria, meccanica, pneumatici e lavorazioni.
 - Nuovo servizio di prenotazione cambio gomme evidenziato.
-- Calendario integrato direttamente nel sito.
+- Calendario Google Appointment Schedule integrato direttamente nel sito.
 - CTA collegate: valutazione in sede, prenotazione cambio gomme, lavorazioni, telefono, email e indicazioni Google Maps.
 - SEO/GEO tecnico: metadata, canonical, Open Graph, sitemap, robots e schema LocalBusiness/AutoBodyShop.
-- Endpoint `POST /api/appointments` pronto per Supabase.
-- Script Supabase in `supabase/001_appointments.sql`.
+- Embed inline della booking page Google Calendar per il cambio gomme.
 - `.env.example` con variabili richieste.
 
 ## Comportamento del form prenotazioni
 
-Il form e collegato a:
+La prenotazione cambio gomme usa Google Calendar Appointment Schedule. Il cliente completa la booking page Google direttamente dentro al sito, senza uscire dalla landing.
 
 ```text
-/api/appointments
+NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL
 ```
 
-Se Supabase non e configurato, il form non simula una prenotazione riuscita. Mostra invece un messaggio chiaro che invita a contattare l'officina telefonicamente.
+Se la variabile non e configurata, il sito mostra una card professionale di collegamento calendario e una CTA telefonica.
 
-Quando Supabase sara configurato con le variabili ambiente, le richieste verranno salvate nella tabella:
-
-```text
-appointments
-```
+Nel modulo Google e consigliato aggiungere campi di rubrica chiari: telefono, auto, misura pneumatici, deposito gomme e note.
 
 ## Cosa resta da fare quando arrivano le credenziali
 
 1. Collegare il repository GitHub a Netlify.
-2. Creare o selezionare il progetto Supabase.
-3. Eseguire in Supabase lo script `supabase/001_appointments.sql`.
-4. Inserire in Netlify `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`.
-5. Fare deploy Netlify.
-6. Testare una richiesta prenotazione e verificare che compaia in Supabase.
-7. Collegare `borsiericarservice.it` e `www.borsiericarservice.it`.
-8. Aggiornare DNS secondo le istruzioni Netlify.
-9. Verificare redirect e canonical su `https://www.borsiericarservice.it`.
-10. Fare test finale da mobile e desktop.
+2. Creare in Google Calendar una booking page dedicata al cambio gomme.
+3. Configurare disponibilita, durata slot, buffer, limiti giornalieri e promemoria.
+4. Aggiungere alla booking page campi rubrica: telefono, auto, misura pneumatici, deposito e note.
+5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
+6. Inserire in Netlify `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
+7. Fare deploy Netlify.
+8. Testare una prenotazione reale e verificare che compaia nel calendario Google del cliente.
+9. Collegare `borsiericarservice.it` e `www.borsiericarservice.it`.
+10. Aggiornare DNS secondo le istruzioni Netlify.
+11. Verificare redirect e canonical su `https://www.borsiericarservice.it`.
+12. Fare test finale da mobile e desktop.
 
 ## Dati ancora da confermare con cliente
 
@@ -78,7 +75,8 @@ appointments
 - Durata reale slot cambio gomme.
 - Numero massimo di auto gestibili per fascia.
 - Giorni di chiusura, ferie e festivita.
-- Email o flusso di notifica per le prenotazioni.
+- Link Google Calendar Appointment Schedule definitivo.
+- Campi rubrica definitivi nella booking page Google.
 - Privacy/cookie policy definitiva.
 - Foto reali di carrozzeria e officina per sostituire immagini stock.
 
