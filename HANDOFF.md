@@ -129,6 +129,20 @@ Le richieste per gomme nuove vengono inviate a `borsiericar@gmail.com` tramite `
 - Eventuali foto reali del cliente da usare in futuro al posto delle immagini premium generate.
 - Validita e condizioni definitive della promozione web gomme nuove -10%.
 
+## Deploy automatico su Tophost
+
+Il dominio `borsiericarservice.it` punta gia allo spazio web Tophost (DNS A record su `217.64.195.209`, HTTPS e redirect automatico gia attivi lato pannello). Ogni push su `main` builda il sito e carica `out/` via FTPS nella document root tramite [.github/workflows/deploy.yml](.github/workflows/deploy.yml).
+
+Secrets da configurare su GitHub (Settings > Secrets and variables > Actions):
+
+- `FTP_SERVER` — host FTP Tophost (es. `ftp.borsiericarservice.it`)
+- `FTP_USERNAME` — utente FTP/cPanel
+- `FTP_PASSWORD` — password FTP/cPanel
+- `FTP_SERVER_DIR` — path della document root sullo spazio web (verificare da File Manager, es. `/` o `/web/`)
+- `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL` — opzionale; se assente il sito va live con la card placeholder calendario
+
+Il workflow non cancella file gia presenti sullo spazio web che non fanno parte della build (`dangerous-clean-slate-enabled` disattivato): fare un backup/pulizia del vecchio sito da Utility > Backup e Ripristino prima del primo deploy, poi valutare se abilitarlo per i deploy successivi. Trigger manuale disponibile da GitHub Actions > Deploy su Tophost > Run workflow.
+
 ## Comandi utili
 
 Installazione:

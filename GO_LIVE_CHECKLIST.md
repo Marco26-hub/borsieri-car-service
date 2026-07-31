@@ -23,6 +23,8 @@
 ## Da fare prima del dominio ufficiale
 
 1. Ottenere accesso Tophost, FTP/file manager e gestione DNS.
+   - Configurare i secrets GitHub Actions (`FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`, `FTP_SERVER_DIR`, `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`) per il deploy automatico, vedi [HANDOFF.md](HANDOFF.md).
+   - Fare backup del vecchio sito attualmente online prima del primo deploy automatico.
 2. Creare in Google Calendar una booking page dedicata al cambio gomme.
 3. Configurare orari, durata slot, buffer, limiti giornalieri e promemoria.
 4. Verificare nel configuratore del sito i flag:
