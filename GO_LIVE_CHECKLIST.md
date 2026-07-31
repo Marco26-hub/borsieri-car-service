@@ -20,7 +20,8 @@
 4. Aggiungere nel Booking form Google i flag:
    - `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
    - `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
-   - `Rubrica cliente`: telefono, auto, misura pneumatici e note.
+   - `Gomme nuove`: tipo gomma estiva/invernale/4 stagioni, larghezza, spalla, diametro, indice carico/velocita e fascia preferita.
+   - `Rubrica cliente`: telefono, auto, targa opzionale e note.
 5. Copiare il link da `Sharing options > Website embed > Inline booking page`.
 6. Impostare su Netlify la variabile `NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL`.
 7. Verificare che la prenotazione compaia nel calendario Google del cliente.

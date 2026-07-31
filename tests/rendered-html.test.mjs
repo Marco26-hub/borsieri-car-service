@@ -40,11 +40,15 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Prenota pneumatici e cambio gomme/);
   assert.match(html, /Nuovo servizio online/);
   assert.match(html, /Google Calendar/);
-  assert.match(html, /Rubrica chiara/);
+  assert.match(html, /Gestione appuntamento/);
+  assert.match(html, /Menu chiaro per gomme e lavorazioni/);
   assert.match(html, /Riparazione gomma/);
   assert.match(html, /Sola convergenza/);
   assert.match(html, /Gomme in magazzino/);
   assert.match(html, /Gomme da portare/);
+  assert.match(html, /Tipo gomma: estiva, invernale, 4 stagioni/);
+  assert.match(html, /Misura: larghezza \/ spalla \/ diametro/);
+  assert.match(html, /Indice carico e velocita/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);
@@ -73,6 +77,7 @@ test("keeps Netlify and production handoff configuration in sync", async () => {
   assert.match(checklist, /Google Calendar Appointment Schedule/);
   assert.match(checklist, /Tipo intervento/);
   assert.match(checklist, /Gestione pneumatici/);
+  assert.match(checklist, /Gomme nuove/);
 
   assert.match(page, /id="prenota"/);
   assert.match(page, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);

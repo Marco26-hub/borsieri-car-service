@@ -56,7 +56,8 @@ Nel modulo Google vanno aggiunti flag chiari:
 
 - `Tipo intervento`: Cambio gomme, Riparazione gomma, Sola convergenza.
 - `Gestione pneumatici`: Gomme sue, Gomme nuove, Gomme in magazzino, Gomme da portare.
-- `Rubrica cliente`: telefono, auto, misura pneumatici e note.
+- `Gomme nuove`: tipo gomma estiva/invernale/4 stagioni, larghezza, spalla, diametro, indice carico/velocita e fascia preferita.
+- `Rubrica cliente`: telefono, auto, targa opzionale e note.
 
 ## Cosa resta da fare quando arrivano le credenziali
 

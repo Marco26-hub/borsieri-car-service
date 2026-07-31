@@ -84,9 +84,24 @@ const bookingDirectoryGroups = [
     items: ["Gomme sue", "Gomme nuove", "Gomme in magazzino", "Gomme da portare"],
   },
   {
-    title: "Rubrica cliente",
-    items: ["Telefono", "Auto", "Misura pneumatici", "Note"],
+    title: "Gomme nuove",
+    items: [
+      "Tipo gomma: estiva, invernale, 4 stagioni",
+      "Misura: larghezza / spalla / diametro",
+      "Indice carico e velocita",
+      "Preferenza fascia: premium, quality, economy",
+    ],
   },
+  {
+    title: "Rubrica cliente",
+    items: ["Telefono", "Auto", "Targa opzionale", "Note"],
+  },
+];
+
+const appointmentFlowItems = [
+  { label: "Slot", text: "Il cliente seleziona data e orario dal calendario Google." },
+  { label: "Flag", text: "Borsieri riceve lavorazione, provenienza gomme e dati veicolo." },
+  { label: "Conferma", text: "L'appuntamento entra nel calendario del cliente con notifica." },
 ];
 
 function buildGoogleAppointmentUrl(value?: string) {
@@ -215,8 +230,16 @@ export default function Home() {
                 </div>
 
                 <div className="booking-directory">
-                  <span className="booking-field-title">Rubrica chiara</span>
-                  <h3>Menu e flag da impostare</h3>
+                  <span className="booking-field-title">Gestione appuntamento</span>
+                  <h3>Menu chiaro per gomme e lavorazioni</h3>
+                  <div className="appointment-flow" aria-label="Flusso appuntamento">
+                    {appointmentFlowItems.map((item) => (
+                      <div className="appointment-flow-item" key={item.label}>
+                        <strong>{item.label}</strong>
+                        <span>{item.text}</span>
+                      </div>
+                    ))}
+                  </div>
                   <div className="booking-directory-groups">
                     {bookingDirectoryGroups.map((group) => (
                       <div className="booking-directory-group" key={group.title}>
