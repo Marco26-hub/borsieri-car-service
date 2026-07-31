@@ -50,6 +50,7 @@ export default function TireBookingPage() {
         </Link>
         <nav className="nav" aria-label="Navigazione principale">
           <Link href="/#servizi">Carrozzeria</Link>
+          <Link href="/#meccanica">Meccanica</Link>
           <Link href="/#lavorazioni">Lavorazioni</Link>
           <a aria-current="page" href="#prenota">Cambio gomme</a>
           <Link href="/#contatti">Contatti</Link>

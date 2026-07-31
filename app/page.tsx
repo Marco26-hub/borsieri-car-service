@@ -92,6 +92,7 @@ export default function Home() {
         </a>
         <nav className="nav" aria-label="Navigazione principale">
           <a href="#servizi">Carrozzeria</a>
+          <a href="#meccanica">Meccanica</a>
           <a href="#lavorazioni">Lavorazioni</a>
           <a href="/prenotazione-cambio-gomme">Cambio gomme</a>
           <a href="#contatti">Contatti</a>
@@ -114,6 +115,9 @@ export default function Home() {
             <div className="hero-actions">
               <a className="button primary" href="#servizi">
                 Richiedi valutazione in sede
+              </a>
+              <a className="button secondary" href="#meccanica">
+                Assistenza meccanica
               </a>
               <a className="button secondary" href="/prenotazione-cambio-gomme">
                 Prenota cambio gomme
@@ -184,6 +188,51 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mechanic-focus" id="meccanica">
+        <div className="section-inner mechanic-focus-grid">
+          <div className="mechanic-focus-media">
+            <img
+              src="/servizio-meccanica.webp"
+              alt="Tecnico Borsieri durante un intervento nel vano motore"
+            />
+          </div>
+          <div className="mechanic-focus-copy">
+            <div className="eyebrow">Officina meccanica</div>
+            <h2>Diagnosi e manutenzione con competenza tecnica</h2>
+            <p>
+              L&apos;area meccanica completa il servizio Borsieri con controlli accurati,
+              manutenzione programmata e interventi sui principali sistemi del veicolo. Un unico
+              referente coordina diagnosi, lavorazione e verifica finale.
+            </p>
+            <div className="mechanic-capabilities" aria-label="Servizi di officina meccanica">
+              <div>
+                <strong>Diagnosi e controlli</strong>
+                <span>Elettronica, livelli, componenti e verifica delle anomalie.</span>
+              </div>
+              <div>
+                <strong>Manutenzione programmata</strong>
+                <span>Tagliandi e interventi periodici secondo le esigenze del veicolo.</span>
+              </div>
+              <div>
+                <strong>Sicurezza e comfort</strong>
+                <span>Freni, sospensioni, climatizzazione e controlli funzionali.</span>
+              </div>
+            </div>
+            <div className="mechanic-focus-actions">
+              <a
+                className="button primary"
+                href="mailto:borsiericar@gmail.com?subject=Richiesta%20intervento%20meccanico"
+              >
+                Richiedi un controllo
+              </a>
+              <a className="button mechanic-secondary" href="tel:+39031210622">
+                Chiama l&apos;officina
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="swiss-service" aria-labelledby="swiss-service-title">
         <div className="section-inner swiss-service-grid">
           <div className="swiss-service-copy">
@@ -207,12 +256,19 @@ export default function Home() {
             </div>
           </div>
           <div className="replacement-car-highlight">
-            <span>Mobilita durante la lavorazione</span>
-            <strong>Auto sostitutiva anche per residenti in Svizzera</strong>
-            <p>
-              Disponibile su richiesta e previa conferma, in base alla durata dell&apos;intervento e
-              alla disponibilita dei veicoli.
-            </p>
+            <div
+              aria-label="Fiat Panda sostitutiva Borsieri Car Service"
+              className="replacement-car-image"
+              role="img"
+            />
+            <div className="replacement-car-content">
+              <span>Mobilita durante la lavorazione</span>
+              <strong>Auto sostitutiva anche per residenti in Svizzera</strong>
+              <p>
+                Disponibile su richiesta e previa conferma, in base alla durata dell&apos;intervento e
+                alla disponibilita dei veicoli.
+              </p>
+            </div>
           </div>
         </div>
       </section>

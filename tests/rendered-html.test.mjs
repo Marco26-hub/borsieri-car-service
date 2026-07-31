@@ -32,6 +32,10 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /topbar-booking-cta/);
   assert.match(html, /Servizio dedicato ai clienti dalla Svizzera/);
   assert.match(html, /Auto sostitutiva anche per residenti in Svizzera/);
+  assert.match(html, /Diagnosi e manutenzione con competenza tecnica/);
+  assert.match(html, /Assistenza meccanica/);
+  assert.match(html, /id="meccanica"/);
+  assert.match(html, /replacement-car-image/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);

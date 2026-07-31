@@ -664,39 +664,128 @@ h1 {
 }
 
 .replacement-car-highlight {
-  align-content: end;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.88)),
-    url("/auto-sostitutiva-borsieri.webp");
-  background-position: center;
-  background-size: cover;
+  background: #0b0b0b;
   border: 1px solid rgba(255, 153, 0, 0.36);
   border-radius: 8px;
   display: grid;
-  min-height: 360px;
-  padding: 22px;
+  grid-template-rows: minmax(250px, 1fr) auto;
+  min-height: 480px;
+  overflow: hidden;
 }
 
-.replacement-car-highlight span {
+.replacement-car-image {
+  background-image: url("/auto-sostitutiva-borsieri.webp");
+  background-position: center;
+  background-size: cover;
+  min-height: 250px;
+}
+
+.replacement-car-content {
+  border-top: 1px solid rgba(255, 153, 0, 0.28);
+  padding: 20px;
+}
+
+.replacement-car-content span {
   color: var(--orange);
+  display: block;
   font-size: 0.72rem;
   font-weight: 900;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
 
-.replacement-car-highlight strong {
+.replacement-car-content strong {
+  display: block;
   font-size: clamp(1.55rem, 7vw, 2.5rem);
   line-height: 1.02;
   max-width: 540px;
   text-transform: uppercase;
 }
 
-.replacement-car-highlight p {
+.replacement-car-content p {
   color: #d4d4d4;
   line-height: 1.5;
   margin: 14px 0 0;
   max-width: 520px;
+}
+
+.mechanic-focus {
+  background: #ececec;
+  color: #111;
+}
+
+.mechanic-focus-grid {
+  display: grid;
+  gap: 28px;
+}
+
+.mechanic-focus-media {
+  border-radius: 8px;
+  min-height: 320px;
+  overflow: hidden;
+}
+
+.mechanic-focus-media img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.mechanic-focus-copy .eyebrow {
+  color: #4f4f4f;
+}
+
+.mechanic-focus-copy h2 {
+  font-size: clamp(2rem, 10vw, 4rem);
+  line-height: 0.96;
+  margin: 0;
+  max-width: 760px;
+  text-transform: uppercase;
+}
+
+.mechanic-focus-copy > p {
+  color: #535353;
+  line-height: 1.58;
+  margin: 18px 0 0;
+  max-width: 680px;
+}
+
+.mechanic-capabilities {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  margin-top: 24px;
+}
+
+.mechanic-capabilities > div {
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  display: grid;
+  gap: 6px;
+  padding: 14px 0;
+}
+
+.mechanic-capabilities strong {
+  font-size: 0.92rem;
+  text-transform: uppercase;
+}
+
+.mechanic-capabilities span {
+  color: #616161;
+  line-height: 1.45;
+}
+
+.mechanic-focus-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.button.mechanic-secondary {
+  background: transparent;
+  border-color: rgba(0, 0, 0, 0.28);
+  color: #111;
+}
+
+.button.mechanic-secondary:hover {
+  border-color: #111;
 }
 
 .booking-page {
@@ -1469,6 +1558,10 @@ footer {
     display: flex;
   }
 
+  .mechanic-focus-actions {
+    display: flex;
+  }
+
   .booking-contact-actions {
     grid-template-columns: repeat(2, max-content);
   }
@@ -1488,6 +1581,8 @@ footer {
 
   .nav {
     display: flex;
+    font-size: 0.84rem;
+    gap: 16px;
   }
 
   .hero {
@@ -1620,6 +1715,15 @@ footer {
   .swiss-service-grid {
     align-items: stretch;
     grid-template-columns: minmax(0, 0.92fr) minmax(380px, 0.72fr);
+  }
+
+  .mechanic-focus-grid {
+    align-items: stretch;
+    grid-template-columns: minmax(420px, 0.92fr) minmax(0, 0.88fr);
+  }
+
+  .mechanic-focus-media {
+    min-height: 620px;
   }
 
   .contact-grid {
