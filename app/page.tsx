@@ -1,8 +1,7 @@
 const services = [
   {
     title: "Carrozzeria specializzata",
-    image:
-      "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1200&q=86",
+    image: "/servizio-carrozzeria.webp",
     description:
       "Un processo tecnico strutturato per valutazione del danno, ripristino dei lamierati, verniciatura e controllo qualita finale.",
     items: ["Ripristino urti, graffi e ammaccature", "Verniciatura e finitura colore", "Grandine, cristalli e gestione sinistri"],
@@ -10,16 +9,14 @@ const services = [
   },
   {
     title: "Officina meccanica",
-    image:
-      "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=1200&q=86",
+    image: "/servizio-meccanica.webp",
     description:
       "Controlli meccanici, diagnosi e manutenzione per completare l'intervento sull'auto con un unico referente.",
     items: ["Tagliandi e manutenzione programmata", "Diagnosi elettronica e controlli", "Freni, sospensioni e climatizzazione"],
   },
   {
     title: "Gommista e pneumatici",
-    image:
-      "https://images.unsplash.com/photo-1606577924006-27d39b132ae2?auto=format&fit=crop&w=1200&q=86",
+    image: "/servizio-pneumatici.webp",
     description:
       "Servizio pneumatici per cambio stagione, sicurezza su strada e corretta usura delle gomme.",
     items: ["Cambio gomme estive e invernali", "Equilibratura, convergenza e assetto", "Riparazione e deposito pneumatici"],
@@ -99,8 +96,8 @@ export default function Home() {
           <a href="/prenotazione-cambio-gomme">Cambio gomme</a>
           <a href="#contatti">Contatti</a>
         </nav>
-        <a className="button primary" href="/prenotazione-cambio-gomme">
-          Prenota gomme
+        <a className="button primary topbar-booking-cta" href="/prenotazione-cambio-gomme">
+          <span>Prenota cambio gomme</span>
         </a>
       </header>
 

@@ -26,6 +26,10 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Nuovo servizio online/);
   assert.match(html, /href="\/prenotazione-cambio-gomme"/);
   assert.match(html, /Apri il calendario/);
+  assert.match(html, /servizio-carrozzeria\.webp/);
+  assert.match(html, /servizio-meccanica\.webp/);
+  assert.match(html, /servizio-pneumatici\.webp/);
+  assert.match(html, /topbar-booking-cta/);
   assert.match(html, /Servizio dedicato ai clienti dalla Svizzera/);
   assert.match(html, /Auto sostitutiva anche per residenti in Svizzera/);
   assert.match(html, /Richiedi valutazione in sede/);
