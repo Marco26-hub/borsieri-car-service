@@ -1,14 +1,13 @@
 "use client";
 
 import { type FormEvent, useEffect, useState } from "react";
+import Cal from "@calcom/embed-react";
 
 const bookingActionOptions = ["Nuova prenotazione", "Cambia prenotazione", "Annulla prenotazione"];
-const interventionOptions = ["Cambio gomme", "Riparazione gomma", "Sola convergenza"];
+const interventionOptions = ["Cambio gomme", "Riparazione gomma"];
 const tireManagementOptions = [
-  "Gomme sue",
   "Gomme nuove",
   "Gomme in magazzino",
-  "Gomme da portare",
 ];
 const seasonOptions = ["Estive", "Invernali", "4 stagioni"];
 const tierOptions = ["Premium", "Quality", "Economy"];
@@ -40,9 +39,9 @@ function SelectField({
 }
 
 export default function BookingConfigurator({
-  googleAppointmentUrl,
+  calBookingPath,
 }: {
-  googleAppointmentUrl: string;
+  calBookingPath: string;
 }) {
   const [bookingAction, setBookingAction] = useState("Nuova prenotazione");
   const [bookingReference, setBookingReference] = useState("");
@@ -138,7 +137,7 @@ export default function BookingConfigurator({
     }
   }
 
-  function allowGoogleCalendar() {
+  function allowExternalCalendar() {
     window.localStorage.setItem("borsieri-external-consent", "accepted");
     window.dispatchEvent(new CustomEvent("borsieri-consent-change", { detail: "accepted" }));
   }
@@ -175,7 +174,7 @@ export default function BookingConfigurator({
 
       <fieldset className="choice-group booking-action-group">
         <legend>Gestione appuntamento</legend>
-        <div className="choice-grid choice-grid-three">
+        <div className="choice-grid choice-grid-two">
           {bookingActionOptions.map((option) => (
             <label className={`choice-card${bookingAction === option ? " is-selected" : ""}`} key={option}>
               <input
@@ -232,7 +231,7 @@ export default function BookingConfigurator({
 
       <fieldset className="choice-group" id="scegli-gomme">
         <legend>Gestione pneumatici</legend>
-        <div className="choice-grid">
+        <div className="choice-grid choice-grid-two">
           {tireManagementOptions.map((option) => (
             <label className={`choice-card${tireManagement === option ? " is-selected" : ""}`} key={option}>
               <input
@@ -405,7 +404,7 @@ export default function BookingConfigurator({
 
       <div className="booking-workspace-head">
         <div>
-          <span className="booking-card-label">Passaggio 3 · Agenda online Borsieri</span>
+          <span className="booking-card-label">Passaggio 3 · Agenda Cal.com Borsieri</span>
           <h2>Scegli data e orario</h2>
         </div>
         <p>
@@ -417,7 +416,7 @@ export default function BookingConfigurator({
       <div className="booking-card booking-calendar-card" id="calendario">
         <div className="booking-card-head">
           <div>
-            <span className="booking-card-label">Google Calendar</span>
+            <span className="booking-card-label">Cal.com · Sincronizzato con Google Calendar</span>
             <strong>Prenotazioni cambio gomme</strong>
           </div>
           <span className={`booking-card-badge${submissionStatus === "success" && !isCancellation ? "" : " is-locked"}`}>
@@ -445,30 +444,29 @@ export default function BookingConfigurator({
             ) : !externalConsent ? (
               <div className="google-booking-placeholder booking-calendar-consent">
                 <span className="booking-card-label">Consenso richiesto</span>
-                <strong>Abilita Google Calendar per vedere gli slot</strong>
+                <strong>Abilita Cal.com per vedere gli slot</strong>
                 <p>
-                  Il calendario esterno resta disattivato finche non autorizzi il collegamento a
-                  Google.
+                  L&apos;agenda esterna resta disattivata finche non autorizzi il collegamento a
+                  Cal.com.
                 </p>
-                <button className="button primary" onClick={allowGoogleCalendar} type="button">
-                  Abilita Google Calendar
+                <button className="button primary" onClick={allowExternalCalendar} type="button">
+                  Abilita agenda online
                 </button>
               </div>
-            ) : googleAppointmentUrl ? (
-              <iframe
-                className="google-booking-frame"
-                loading="eager"
-                referrerPolicy="no-referrer-when-downgrade"
-                src={googleAppointmentUrl}
-                title="Prenotazione cambio gomme Borsieri Car Service"
+            ) : calBookingPath ? (
+              <Cal
+                calLink={calBookingPath}
+                className="cal-booking-embed"
+                config={{ layout: "month_view", theme: "dark" }}
+                style={{ minHeight: "700px", width: "100%" }}
               />
             ) : (
               <div className="google-booking-placeholder">
                 <span className="booking-card-label">Configurazione finale</span>
-                <strong>Calendario Google pronto al collegamento</strong>
+                <strong>Agenda Cal.com pronta al collegamento</strong>
                 <p>
-                  Collegando il link della pagina appuntamenti Google compariranno qui gli slot
-                  liberi e la conferma.
+                  Inserendo il link evento Cal.com compariranno qui gli slot liberi sincronizzati
+                  con il Google Calendar del cliente.
                 </p>
                 <a className="button primary" href="tel:+39031210622">Prenota telefonicamente</a>
               </div>

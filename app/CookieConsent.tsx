@@ -48,8 +48,8 @@ export default function CookieConsent() {
       <div>
         <strong id="consent-title">Privacy e strumenti esterni</strong>
         <p>
-          Il sito usa solo funzioni tecniche necessarie. Google Calendar viene caricato soltanto
-          con il tuo consenso; puoi modificare la scelta in qualsiasi momento.
+          Il sito usa solo funzioni tecniche necessarie. L&apos;agenda Cal.com, sincronizzata con
+          Google Calendar, viene caricata soltanto con il tuo consenso.
         </p>
         <div className="consent-links">
           <a href="https://www.iubenda.com/privacy-policy/16946203" rel="noreferrer" target="_blank">
@@ -65,7 +65,7 @@ export default function CookieConsent() {
           Solo necessari
         </button>
         <button className="button primary" onClick={() => choose("accepted")} type="button">
-          Accetta Google Calendar
+          Accetta agenda online
         </button>
       </div>
     </aside>

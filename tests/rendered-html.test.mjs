@@ -37,6 +37,8 @@ test("server-renders the Borsieri landing with SEO-critical content", async () =
   assert.match(html, /Analisi tecnica e priorita chiare/);
   assert.match(html, /Richiedi valutazione in sede/);
   assert.match(html, /borsiericar@gmail\.com/);
+  assert.match(html, /facebook\.com\/carrozzeriaborsieri/);
+  assert.match(html, /instagram\.com\/borsiericar/);
   assert.doesNotMatch(html, /info@borsiericarservice\.it/);
   assert.match(html, /"@type":"AutoBodyShop"/);
   assert.match(html, /"addressLocality":"San Fermo della Battaglia"/);
@@ -53,14 +55,15 @@ test("renders the dedicated tire booking page and selectable service structure",
   assert.match(html, /Tipo di intervento/);
   assert.match(html, /Cambio gomme/);
   assert.match(html, /Riparazione gomma/);
-  assert.match(html, /Sola convergenza/);
+  assert.doesNotMatch(html, /Sola convergenza/);
   assert.match(html, /Gestione pneumatici/);
   assert.match(html, /Gomme nuove/);
   assert.match(html, /-10% sulle gomme nuove/);
   assert.match(html, /Gomme in magazzino/);
-  assert.match(html, /Gomme da portare/);
+  assert.doesNotMatch(html, /Gomme sue/);
+  assert.doesNotMatch(html, /Gomme da portare/);
   assert.match(html, /Scegli data e orario/);
-  assert.match(html, /Google Calendar/);
+  assert.match(html, /Cal.com/);
   assert.match(html, /Accesso agli slot/);
 });
 
@@ -85,7 +88,7 @@ test("keeps Tophost and production handoff configuration in sync", async () => {
   assert.match(packageJson, /"build": "next build"/);
   assert.match(handoff, /Tophost/);
   assert.match(checklist, /Tophost/);
-  assert.match(checklist, /Google Calendar Appointment Schedule/);
+  assert.match(checklist, /Cal\.com/);
   assert.match(checklist, /Tipo intervento/);
   assert.match(checklist, /Gestione pneumatici/);
   assert.match(checklist, /Gomme nuove/);
@@ -96,8 +99,8 @@ test("keeps Tophost and production handoff configuration in sync", async () => {
   assert.match(globalsCss, /hero-carrozzeria-cinematica\.webp/);
   assert.doesNotMatch(page, /id="prenota"/);
   assert.match(bookingPage, /id="prenota"/);
-  assert.match(bookingPage, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
-  assert.match(bookingPage, /buildGoogleAppointmentUrl/);
+  assert.match(bookingPage, /NEXT_PUBLIC_CALCOM_BOOKING_URL/);
+  assert.match(bookingPage, /buildCalBookingPath/);
   assert.match(configurator, /name="intervention"/);
   assert.match(configurator, /name="tire-management"/);
   assert.match(configurator, /id="scegli-gomme"/);
@@ -107,11 +110,12 @@ test("keeps Tophost and production handoff configuration in sync", async () => {
   assert.match(configurator, /name="numero_preventivo"/);
   assert.match(configurator, /Richiedi preventivo/);
   assert.match(configurator, /Sconto 10% gomme nuove/);
+  assert.match(configurator, /@calcom\/embed-react/);
   assert.match(configurator, /fetch\("\/api\/preventivo\.php"/);
   assert.match(quoteEndpoint, /borsiericar@gmail\.com/);
   assert.match(quoteEndpoint, /Promozione:/);
   assert.match(quoteEndpoint, /mail\(\$recipient/);
   assert.match(htaccess, /RewriteCond %\{HTTPS\} !=on/);
   assert.doesNotMatch(page, /fetch\("\/api\/appointments"/);
-  assert.match(envExample, /NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL/);
+  assert.match(envExample, /NEXT_PUBLIC_CALCOM_BOOKING_URL/);
 });

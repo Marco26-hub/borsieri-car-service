@@ -27,7 +27,7 @@ jobs:
 
       - name: Build statico (next export)
         env:
-          NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL: ${{ secrets.NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL }}
+          NEXT_PUBLIC_CALCOM_BOOKING_URL: ${{ secrets.NEXT_PUBLIC_CALCOM_BOOKING_URL }}
         run: npm run build
 
       - name: Deploy FTP su Tophost

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- Static Tophost export uses hand-authored WebP sources. */
 import { CookieSettingsLink } from "./CookieConsent";
+import SocialLinks from "./SocialLinks";
 
 const bodyworkItems = [
   "Ripristino urti, graffi e ammaccature",
@@ -335,6 +336,7 @@ export default function Home() {
       <footer>
         <span>Borsieri Car Service S.r.l. · P.IVA 03996560136</span>
         <span>Carrozzeria · Officina meccanica · Gommista · San Fermo della Battaglia</span>
+        <SocialLinks />
         <div className="footer-legal-links">
           <a href="https://www.iubenda.com/privacy-policy/16946203" rel="noreferrer" target="_blank">Privacy policy</a>
           <a href="https://www.iubenda.com/privacy-policy/16946203/cookie-policy" rel="noreferrer" target="_blank">Cookie policy</a>

@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CookieSettingsLink } from "../CookieConsent";
+import SocialLinks from "../SocialLinks";
 import BookingConfigurator from "./BookingConfigurator";
 
 export const metadata: Metadata = {
@@ -31,25 +32,24 @@ const appointmentFlowItems = [
   { label: "01", title: "Operazione", text: "Scegli nuova prenotazione, modifica o annullamento e indica il servizio." },
   { label: "02", title: "Dati obbligatori", text: "Inserisci riferimenti del cliente, auto e targa." },
   { label: "03", title: "Invio", text: "Trasmetti i dati o la richiesta di preventivo all'officina." },
-  { label: "04", title: "Agenda", text: "Per prenotazioni e modifiche, scegli uno slot libero nel calendario Google." },
+  { label: "04", title: "Agenda", text: "Per prenotazioni e modifiche, scegli uno slot Cal.com sincronizzato con Google Calendar." },
 ];
 
-function buildGoogleAppointmentUrl(value?: string) {
+function buildCalBookingPath(value?: string) {
   if (!value) return "";
 
   try {
     const url = new URL(value);
-    if (!url.hostname.endsWith("calendar.google.com")) return "";
-    if (!url.searchParams.has("gv")) url.searchParams.set("gv", "true");
-    return url.toString();
+    if (url.hostname !== "cal.com" && !url.hostname.endsWith(".cal.com")) return "";
+    return url.pathname.replace(/^\/+|\/+$/g, "");
   } catch {
-    return "";
+    return /^[a-z0-9_-]+\/[a-z0-9_-]+$/i.test(value) ? value : "";
   }
 }
 
 export default function TireBookingPage() {
-  const googleAppointmentUrl = buildGoogleAppointmentUrl(
-    process.env.NEXT_PUBLIC_GOOGLE_APPOINTMENT_URL,
+  const calBookingPath = buildCalBookingPath(
+    process.env.NEXT_PUBLIC_CALCOM_BOOKING_URL,
   );
 
   return (
@@ -81,7 +81,7 @@ export default function TireBookingPage() {
           <div className="booking-page-facts" aria-label="Informazioni sul servizio">
             <span>Calendario aggiornato</span>
             <span>Lunedi-venerdi</span>
-            <span>Conferma Google Calendar</span>
+            <span>Cal.com + Google Calendar</span>
           </div>
           <div className="booking-page-hero-actions">
             <a className="button primary" href="#configuratore">
@@ -101,7 +101,7 @@ export default function TireBookingPage() {
 
       <section className="booking-workspace" id="prenota">
         <div className="section-inner">
-          <BookingConfigurator googleAppointmentUrl={googleAppointmentUrl} />
+          <BookingConfigurator calBookingPath={calBookingPath} />
         </div>
       </section>
 
@@ -142,6 +142,7 @@ export default function TireBookingPage() {
       <footer>
         <span>Borsieri Car Service S.r.l. · P.IVA 03996560136</span>
         <span>Carrozzeria · Officina meccanica · Gommista · San Fermo della Battaglia</span>
+        <SocialLinks />
         <div className="footer-legal-links">
           <a href="https://www.iubenda.com/privacy-policy/16946203" rel="noreferrer" target="_blank">Privacy policy</a>
           <a href="https://www.iubenda.com/privacy-policy/16946203/cookie-policy" rel="noreferrer" target="_blank">Cookie policy</a>
