@@ -1407,6 +1407,37 @@ h1 {
   text-transform: uppercase;
 }
 
+.booking-contact-inner .booking-location-title {
+  display: grid;
+  gap: 8px;
+  max-width: 720px;
+}
+
+.booking-location-title > span {
+  color: var(--orange);
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.booking-location-title > strong {
+  font-size: 2.15rem;
+  line-height: 1;
+}
+
+.booking-location-title > small {
+  align-items: center;
+  border: 1px solid rgba(255, 153, 0, 0.5);
+  border-radius: 999px;
+  color: #ffc15f;
+  display: inline-flex;
+  font-size: 0.78rem;
+  font-weight: 900;
+  justify-self: start;
+  min-height: 30px;
+  padding: 0 11px;
+}
+
 .booking-contact-actions {
   display: grid;
   gap: 10px;
@@ -1690,41 +1721,117 @@ footer {
 
 .footer-social {
   align-items: center;
+  background: linear-gradient(110deg, rgba(255, 153, 0, 0.08), rgba(255, 255, 255, 0.025));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 7px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 14px;
+  gap: 16px 24px;
+  justify-content: space-between;
+  padding: 16px;
   width: 100%;
 }
 
-.footer-social > strong {
-  color: #fff;
-  font-size: 0.82rem;
+.footer-social-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.footer-social-heading > span {
+  color: var(--orange);
+  font-size: 0.7rem;
+  font-weight: 900;
   text-transform: uppercase;
 }
 
-.footer-social > div {
+.footer-social-heading > strong {
+  color: #fff;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.footer-social-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
-.footer-social a {
+.footer-social-link {
   align-items: center;
-  border: 1px solid rgba(255, 153, 0, 0.46);
-  border-radius: 5px;
-  color: var(--orange);
-  display: inline-flex;
-  font-size: 0.78rem;
-  font-weight: 850;
-  min-height: 36px;
-  padding: 0 12px;
-  text-transform: uppercase;
-  transition: background 180ms ease, color 180ms ease;
+  background: rgba(0, 0, 0, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 38px minmax(94px, 1fr) 18px;
+  min-height: 58px;
+  padding: 8px 12px 8px 9px;
+  position: relative;
+  transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
 }
 
-.footer-social a:hover {
-  background: var(--orange);
-  color: #050505;
+.footer-social-link::before {
+  background: var(--social-accent);
+  content: "";
+  height: 2px;
+  left: 10px;
+  position: absolute;
+  right: 10px;
+  top: -1px;
+}
+
+.footer-social-link.is-facebook {
+  --social-accent: #5b8def;
+}
+
+.footer-social-link.is-instagram {
+  --social-accent: #e463a5;
+}
+
+.footer-social-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--social-accent);
+  transform: translateY(-2px);
+}
+
+.footer-social-icon {
+  align-items: center;
+  background: color-mix(in srgb, var(--social-accent) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--social-accent) 46%, transparent);
+  border-radius: 50%;
+  color: var(--social-accent);
+  display: inline-flex;
+  height: 38px;
+  justify-content: center;
+  width: 38px;
+}
+
+.footer-social-copy {
+  display: grid;
+  gap: 2px;
+}
+
+.footer-social-copy small {
+  color: #999;
+  font-size: 0.66rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.footer-social-copy strong {
+  color: #fff;
+  font-size: 0.84rem;
+  text-transform: uppercase;
+}
+
+.footer-social-arrow {
+  color: #7f7f7f;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.footer-social-link:hover .footer-social-arrow {
+  color: var(--social-accent);
+  transform: translate(2px, -2px);
 }
 
 .footer-legal-links {
@@ -1887,6 +1994,10 @@ footer {
     grid-template-columns: repeat(2, max-content);
   }
 
+  .booking-location-title > strong {
+    font-size: 2.75rem;
+  }
+
   section {
     padding: 72px 28px;
     scroll-margin-top: 104px;
@@ -2004,6 +2115,10 @@ footer {
 
   .booking-page-facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .booking-location-title > strong {
+    font-size: 3.2rem;
   }
 
   .booking-workspace-head,
@@ -2258,13 +2373,20 @@ footer {
   }
 
   .footer-social {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
+    padding: 14px;
   }
 
-  .footer-social a {
-    font-size: 0.82rem;
-    min-height: 42px;
+  .footer-social-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .footer-social-link {
+    min-height: 62px;
+    width: 100%;
   }
 
   section {
@@ -2302,6 +2424,10 @@ footer {
   .booking-workspace-head h2,
   .tire-configurator-head h2 {
     font-size: 1.95rem;
+  }
+
+  .booking-location-title > strong {
+    font-size: 2rem;
   }
 }
 

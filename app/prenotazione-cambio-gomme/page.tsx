@@ -129,8 +129,12 @@ export default function TireBookingPage() {
       <section className="booking-contact-band">
         <div className="section-inner booking-contact-inner">
           <div>
-            <span className="booking-card-label">Borsieri Car Service</span>
-            <h2>Via San Fermo 64, San Fermo della Battaglia</h2>
+            <span className="booking-card-label">Sede Borsieri Car Service</span>
+            <h2 className="booking-location-title">
+              <span>Via San Fermo 64</span>
+              <strong>San Fermo della Battaglia</strong>
+              <small>(Como)</small>
+            </h2>
           </div>
           <div className="booking-contact-actions">
             <a className="button primary" href="tel:+39031210622">Chiama l&apos;officina</a>

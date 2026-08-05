@@ -296,7 +296,7 @@ export default function Home() {
       <section className="contact-band" id="contatti">
         <div className="section-inner contact-grid">
           <div>
-            <div className="eyebrow">Via San Fermo 64 · San Fermo della Battaglia</div>
+            <div className="eyebrow">Via San Fermo 64 · San Fermo della Battaglia (Como)</div>
             <h2>Carrozzeria e assistenza auto vicino a Como</h2>
           </div>
           <div className="contact-list">
